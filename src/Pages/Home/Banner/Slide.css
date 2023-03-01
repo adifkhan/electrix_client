@@ -1,0 +1,23 @@
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 250px;
+  height: 250px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 90%;
+}
+
+@media screen and (max-width: 599px) {
+  .banner__slide {
+    margin: 50px 0 0;
+  }
+}

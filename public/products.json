@@ -1,0 +1,76 @@
+[
+  {
+    "id": "1",
+    "name": "DRILL",
+    "img": "https://i.ibb.co/BBmTfJ2/DRILL.png",
+    "customColor": "#266dfc"
+  },
+  {
+    "id": "2",
+    "name": "POLISHER",
+    "img": "https://i.ibb.co/4MmR3DQ/POLISHER.png",
+    "customColor": "#50a2d4"
+  },
+  {
+    "id": "3",
+    "name": "SAW",
+    "img": "https://i.ibb.co/7pWcqFL/SAW.png",
+    "customColor": "#00ccbd"
+  },
+  {
+    "id": "4",
+    "name": "GRINDER",
+    "img": "https://i.ibb.co/z2dVsD1/GRINDER.png",
+    "customColor": "#18e792"
+  },
+  {
+    "id": "5",
+    "name": "HOSE-REEL",
+    "img": "https://i.ibb.co/1vPm2Kv/HOSE-REEL.png",
+    "customColor": "#82cc33"
+  },
+  {
+    "id": "6",
+    "name": "NUTRUNNERS",
+    "img": "https://i.ibb.co/dQj53bs/AIT-NUTRUNNERS.png",
+    "customColor": "#d1c500"
+  },
+  {
+    "id": "7",
+    "name": "RIVET-GUN",
+    "img": "https://i.ibb.co/Lz1gQjr/RIVET-GUN.png",
+    "customColor": "#f1a62f"
+  },
+  {
+    "id": "8",
+    "name": "SOLDERING",
+    "img": "https://i.ibb.co/YX637z8/SOLDERING-IRON.png",
+    "customColor": "#fd6420"
+  },
+
+  {
+    "id": "9",
+    "name": "PLIERS",
+    "img": "https://i.ibb.co/MMW3KZN/PLIERS-CUTTERS.png",
+    "customColor": "#f521f3"
+  },
+  {
+    "id": "10",
+    "name": "SCREWDRIVER",
+    "img": "https://i.ibb.co/yShWzPG/SCREWDRIVER.png",
+    "customColor": "#c3047d"
+  },
+
+  {
+    "id": "11",
+    "name": "BALANCERS",
+    "img": "https://i.ibb.co/m6SpcrC/BALANCERS.png",
+    "customColor": "#9454ff"
+  },
+  {
+    "id": "12",
+    "name": "RENCH",
+    "img": "https://i.ibb.co/7X0x77c/RENCH.png",
+    "customColor": "#ea193b"
+  }
+]

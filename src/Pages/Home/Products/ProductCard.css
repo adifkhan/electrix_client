@@ -1,0 +1,9 @@
+.product__body:hover .card__img {
+  opacity: 0.6;
+}
+.product__body {
+  transition: scale 300ms;
+}
+.product__body:hover {
+  scale: 1.15;
+}

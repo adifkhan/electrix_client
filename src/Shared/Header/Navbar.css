@@ -1,0 +1,71 @@
+.nav__container::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  top: -20px;
+  z-index: -1;
+
+  background: #343a40;
+}
+.bg__navbar::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  right: -45px;
+  height: 50px;
+  width: 80px;
+  background: #343a40;
+  transform: rotate(-60deg);
+}
+
+.menu__list li a {
+  position: relative;
+  padding: 2px 5px;
+}
+.menu__list li a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid white;
+  transition: 0.5s;
+  opacity: 0;
+}
+.menu__list li a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid white;
+  transition: 0.5s;
+  opacity: 0;
+}
+.menu__list li a:hover::before {
+  transform: scaleY(1.5);
+  opacity: 1;
+  left: 15px;
+}
+.menu__list li a:hover::after {
+  transform: scaleY(1.5);
+  opacity: 1;
+  left: -15px;
+}
+.navbar__toggler {
+  padding: 5px;
+  cursor: pointer;
+  display: grid;
+}
+.navbar__toggler .bar {
+  width: 25px;
+  height: 4px;
+  margin-bottom: 4px;
+  background: white;
+  border-radius: 15%;
+}
+.mini__menu li {
+}
