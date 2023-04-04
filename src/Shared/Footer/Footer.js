@@ -37,14 +37,14 @@ const Footer = () => {
             Subscribe to our mailing list to receive new updates and special
             offers:
           </p>
-          <div class="form-control">
-            <div class="input-group">
+          <div className="form-control">
+            <div className="input-group">
               <input
                 type="text"
                 placeholder="Search…"
-                class="input input-bordered"
+                className="input input-bordered"
               />
-              <button class="btn btn-square">
+              <button className="btn btn-square">
                 <FaPencilAlt />
               </button>
             </div>

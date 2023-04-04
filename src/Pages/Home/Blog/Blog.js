@@ -15,7 +15,7 @@ const Blog = () => {
       </div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mx-auto pb-5 w-[75%]">
         {news.map((n, i) => (
-          <div className="bg-base-100 card">
+          <div key={i} className="bg-base-100 card">
             <img src={n} alt="" className="rounded-t-2xl w-auto" />
             <div className="p-3">
               <h1 className="text-2xl text-[#002632] text-center font-semibold">
