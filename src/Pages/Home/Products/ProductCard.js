@@ -1,6 +1,4 @@
 import React from "react";
-import Button from "../../../Shared/Components/Button";
-import RatingsReviews from "./RatingsReviews";
 import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {

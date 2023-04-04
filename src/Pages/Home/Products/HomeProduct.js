@@ -21,12 +21,12 @@ const HomeProduct = () => {
     <div className="bg-secondary pt-12">
       <div className="text-start border-l-2 border-primary  ml-12 p-0">
         <h2 className="uppercase text-primary text-2xl font-semibold pl-2 leading-6">
-          Pruduct catagories
+          Featured catagories
         </h2>
       </div>
-      <div className="w-[80%] mx-auto">
+      <div className="w-[90%] mx-auto">
         <Swiper
-          slidesPerView={3}
+          slidesPerView={4}
           spaceBetween={30}
           centeredSlides
           navigation

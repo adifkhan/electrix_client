@@ -1,14 +1,24 @@
 import React from "react";
 import { FaShippingFast, FaUserAlt, FaTags } from "react-icons/fa";
 import "./Features.css";
+import feature1 from "../../../images/Feature/feature1.jpg";
+import feature2 from "../../../images/Feature/feature2.jpg";
+import feature3 from "../../../images/Feature/feature3.jpg";
 
 const Features = () => {
   return (
-    <div className="bg-secondary">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3">
-        <div className="feature__body bg-[aqua] flex-1 flex flex-col sm:flex-row justify-around items-center px-5">
-          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-[#04D4F0]">
-            <FaShippingFast className="shipping__icon text-[#04D4F0] text-5xl" />
+    <div className="bg-secondary px-10 py-24">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          className="feature__body flex-1 flex flex-col sm:flex-row justify-around items-center px-5 rounded-lg"
+          style={{
+            backgroundImage: `url(${feature1})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-primary">
+            <FaShippingFast className="shipping__icon text-primary text-5xl" />
           </div>
           <div className="m-5">
             <h2 className="text-2xl text-base-100 font-bold uppercase">
@@ -19,9 +29,16 @@ const Features = () => {
             </p>
           </div>
         </div>
-        <div className="feature__body bg-[#F8D210] flex-1 flex flex-col sm:flex-row justify-around items-center px-5">
-          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-[#d6b71d]">
-            <FaUserAlt className="shipping__icon text-[#F8D210] text-5xl" />
+        <div
+          className="feature__body flex-1 flex flex-col sm:flex-row justify-around items-center px-5 rounded-lg"
+          style={{
+            backgroundImage: `url(${feature2})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-secondary">
+            <FaUserAlt className="shipping__icon text-secondary text-5xl" />
           </div>
           <div className="m-5">
             <h2 className="text-2xl text-base-100 font-bold uppercase">
@@ -32,9 +49,16 @@ const Features = () => {
             </p>
           </div>
         </div>
-        <div className="feature__body bg-[#FA26A0] flex-1 flex flex-col sm:flex-row justify-around items-center px-5">
-          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-[#d6238c]">
-            <FaTags className="shipping__icon text-[#FA26A0] text-5xl" />
+        <div
+          className="feature__body flex-1 flex flex-col sm:flex-row justify-around items-center px-5 rounded-lg"
+          style={{
+            backgroundImage: `url(${feature3})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-primary">
+            <FaTags className="shipping__icon text-primary text-5xl" />
           </div>
           <div className="m-5">
             <h2 className="text-2xl text-base-100 font-bold uppercase">

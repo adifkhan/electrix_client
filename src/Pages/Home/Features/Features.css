@@ -1,6 +1,7 @@
 .shipping__icon {
   transition: scale 300ms;
 }
+
 .feature__body:hover .shipping__icon {
   scale: 1.4;
 }
