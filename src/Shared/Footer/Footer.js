@@ -53,7 +53,7 @@ const Footer = () => {
       </div>
       <div className="w-full h-[1px] bg-[gray] my-5"></div>
       <div className="text-[gray] text-center uppercase">
-        <p>&copy; Copyright {new Date().getFullYear()} all rights reserved</p>
+        <p>&copy; Copyright {new Date().getFullYear()}. all rights reserved</p>
       </div>
     </div>
   );
