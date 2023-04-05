@@ -5,5 +5,5 @@
   transition: scale 300ms;
 }
 .product__body:hover {
-  scale: 1.15;
+  scale: 1.12;
 }

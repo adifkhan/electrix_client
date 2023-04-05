@@ -9,7 +9,7 @@ const Navbar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
 
   return (
-    <div className="nav__container uppercase relative ">
+    <div className="nav__container uppercase relative z-20">
       <div className="flex justify-between items-center h-16 sm:mx-8 md:mx-16 px-3 bg-primary lg:hidden bg__navbar relative overflow-hidden">
         <div onClick={() => setMenuToggle(!menuToggle)}>
           <label className="navbar__toggler" htmlFor="toggle">
@@ -20,7 +20,9 @@ const Navbar = () => {
         </div>
 
         <div>
-          <img className="img w-24 sm:w-32" src={logo} alt="" />
+          <Link to="/">
+            <img className="img w-24 sm:w-32" src={logo} alt="" />
+          </Link>
         </div>
         <div>
           <div
@@ -33,12 +35,14 @@ const Navbar = () => {
       </div>
       <div className="bg__navbar hidden lg:flex justify-between items-center h-16 mx-28 px-10 bg-primary relative overflow-hidden">
         <section>
-          <img src={logo} alt="" />
+          <Link to="/">
+            <img src={logo} alt="" />
+          </Link>
         </section>
         <section className="w-[420px]">
           <ul className="menu__list flex justify-around fs-bold text-white text-sm font-semibold">
             <li>
-              <Link>Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <Link>Products</Link>
@@ -55,14 +59,16 @@ const Navbar = () => {
           </ul>
         </section>
         <section>
-          <Button>login</Button>
+          <Button>
+            <Link to="login">login</Link>
+          </Button>
         </section>
       </div>
       {menuToggle && (
         <section>
-          <ul className="menu__list mini__menu grid grid-cols-1 w-[30%] bg-secondary gap-3 fs-bold text-white text-sm font-semibold absolute sm:left-[32px] md:left-[64px] top-[64px] z-10 lg:hidden pl-3 sm:pl-7 py-4">
+          <ul className="menu__list mini__menu grid grid-cols-1 w-[30%] bg-secondary gap-3 fs-bold text-white text-xs font-semibold absolute sm:left-[32px] md:left-[64px] top-[64px] lg:hidden pl-3 sm:pl-7 py-4">
             <li>
-              <Link>Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <Link>Products</Link>
@@ -76,7 +82,9 @@ const Navbar = () => {
             <li>
               <Link>About</Link>
             </li>
-            <Button>login</Button>
+            <Button>
+              <Link to="login">login</Link>
+            </Button>
           </ul>
         </section>
       )}

@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
         <img className="rounded-t-xl" src={img} alt={name} />
       </figure>
       <button
-        className="px-5 py-3 font-semibold text-white text-[7px] sm:text-lg min-w-[80px] max-w-full uppercase rounded-b-xl bg-[#002632]"
+        className="px-5 py-3 font-semibold text-white text-[7px] sm:text-lg min-w-[80px] max-w-full uppercase rounded-b-xl bg-secondary"
         style={{ color: `${customColor}` }}
       >
         {name}

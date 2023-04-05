@@ -6,8 +6,9 @@
   top: -20px;
   z-index: -1;
 
-  background: #343a40;
+  background: #002632;
 }
+
 .bg__navbar::after {
   content: "";
   position: absolute;
@@ -15,7 +16,7 @@
   right: -45px;
   height: 50px;
   width: 80px;
-  background: #343a40;
+  background: #002632;
   transform: rotate(-60deg);
 }
 
@@ -66,6 +67,4 @@
   margin-bottom: 4px;
   background: white;
   border-radius: 15%;
-}
-.mini__menu li {
 }

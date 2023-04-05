@@ -9,8 +9,8 @@ module.exports = {
       {
         electrixthemes: {
           primary: "#c3002f",
-          secondary: "#343a40",
-          accent: "#37cdbe",
+          secondary: "#002632",
+          accent: "#82cc33",
           neutral: "#3d4451",
           "base-100": "#ffffff",
         },

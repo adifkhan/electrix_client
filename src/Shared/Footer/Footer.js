@@ -4,7 +4,7 @@ import { FaPencilAlt } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className="bg-[#002632] px-24 py-16">
+    <div className="bg-secondary px-6 sm:px-12 lg:px-24 py-16">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <div>
           <img src={electrix} alt="" />
@@ -41,11 +41,11 @@ const Footer = () => {
             <div className="input-group">
               <input
                 type="text"
-                placeholder="Search…"
+                placeholder="Email Address"
                 className="input input-bordered"
               />
-              <button className="btn btn-square">
-                <FaPencilAlt />
+              <button className="btn btn-accent btn-square">
+                <FaPencilAlt className="text-xl text-secondary" />
               </button>
             </div>
           </div>

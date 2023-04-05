@@ -37,8 +37,8 @@ const Features = () => {
             backgroundSize: "cover",
           }}
         >
-          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-[#002632]">
-            <FaUserAlt className="shipping__icon text-[#002632] text-5xl" />
+          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-secondary">
+            <FaUserAlt className="shipping__icon text-secondary text-5xl" />
           </div>
           <div className="m-5">
             <h2 className="text-2xl text-base-100 font-bold uppercase">
