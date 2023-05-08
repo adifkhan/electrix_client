@@ -1,14 +1,8 @@
 import React from "react";
-import "./ProductCard.css";
+import "./CatagoryCard.css";
 
-const ProductCard = ({ product }) => {
-  const { name, img, customColor } = product;
-
-  /* 
-  const ratings = (reviews.reduce((a, b) => a + b, 0) / reviews.length).toFixed(
-    1
-  ); 
-  */
+const CatagoryCard = ({ catagory }) => {
+  const { name, img, customColor } = catagory;
 
   return (
     <div className="product__body card  shadow-gray-500 shadow-lg ">
@@ -25,4 +19,4 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export default ProductCard;
+export default CatagoryCard;

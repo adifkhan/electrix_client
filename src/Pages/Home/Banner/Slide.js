@@ -10,10 +10,10 @@ import "./Slide.css";
 // import required modules
 import { EffectCoverflow } from "swiper";
 
-import useProducts from "../../../Hooks/UseProducts";
+import useProductCatagories from "../../../Hooks/useProductCatagories";
 
 export default function App() {
-  const { products } = useProducts();
+  const [catagories] = useProductCatagories();
   return (
     <div className="banner__slide">
       <Swiper
@@ -31,13 +31,13 @@ export default function App() {
         modules={[EffectCoverflow]}
         className="mySwiper"
       >
-        {products.map((product) => (
-          <SwiperSlide key={product.id}>
+        {catagories.map((catagory) => (
+          <SwiperSlide key={catagory.id}>
             {" "}
             {
               <img
-                src={product.img}
-                alt={product.name}
+                src={catagory.img}
+                alt={catagory.name}
                 className="banner__slide__image"
               ></img>
             }

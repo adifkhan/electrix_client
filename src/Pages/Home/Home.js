@@ -3,16 +3,18 @@ import HomeBanner from "./Banner/HomeBanner";
 import Blog from "./Blog/Blog";
 import BusinessSummary from "./BusinessSummary/BusinessSummary";
 import Features from "./Features/Features";
-import HomeProduct from "./Products/HomeProduct";
+import About from "./About/About";
+import ProductCatagories from "./ProductsCatagories/ProductCatagories";
 
 const Home = () => {
   return (
     <div>
       <HomeBanner />
-      <HomeProduct />
+      <ProductCatagories />
       <BusinessSummary />
-      <Features />
       <Blog />
+      <Features />
+      <About />
     </div>
   );
 };

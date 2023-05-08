@@ -10,13 +10,13 @@ const Footer = () => {
           <img src={electrix} alt="" />
         </div>
         <div>
-          <h2 className="text-[#82cc33] font-semibold text-2xl mb-8 uppercase">
+          <h2 className="text-accent font-semibold text-2xl mb-8 uppercase">
             Contacts
           </h2>
           <div className="text-white flex">
             <p className="mr-5">Address:</p>
             <p>
-              21 Shukrabad,
+              Shukrabad,
               <br /> West Panthapahth, Dhaka
             </p>
           </div>
@@ -26,11 +26,11 @@ const Footer = () => {
           </div>
           <div className="text-white flex">
             <p className="mr-5">Email:</p>
-            <p className="text-[#82cc33]">example@domain.com</p>
+            <p className="text-accent">example@domain.com</p>
           </div>
         </div>
         <div>
-          <h2 className="text-[#d1c500] font-semibold text-2xl uppercase mb-8">
+          <h2 className="text-neutral font-semibold text-2xl uppercase mb-8">
             Newslatter
           </h2>
           <p className="text-white mb-5">
@@ -44,7 +44,7 @@ const Footer = () => {
                 placeholder="Email Address"
                 className="input input-bordered"
               />
-              <button className="btn btn-accent btn-square">
+              <button className="btn btn-neutral btn-square">
                 <FaPencilAlt className="text-xl text-secondary" />
               </button>
             </div>

@@ -19,8 +19,8 @@ const RatingsReviews = ({ ratings }) => {
   });
   return (
     <div className="flex items-center">
-      <span className="font-semibold">{ratings} </span>
-      <span className="flex text-yellow-500 ml-2"> {stars}</span>
+      <span className="font-medium">{ratings} </span>
+      <span className="flex text-yellow-500 ml-1"> {stars}</span>
     </div>
   );
 };

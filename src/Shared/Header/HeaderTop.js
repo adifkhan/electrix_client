@@ -29,31 +29,31 @@ const HeaderTop = () => {
         </div>
         <div className="flex items-center my-2">
           <div
-            className="mx-3 hover:text-primary tooltip tooltip-bottom cursor-pointer"
+            className="mx-3 hover:text-primary tooltip tooltip-top cursor-pointer"
             data-tip="facebook"
           >
             <FaFacebookF />
           </div>
           <div
-            className="mx-3 hover:text-primary tooltip tooltip-bottom cursor-pointer"
+            className="mx-3 hover:text-primary tooltip tooltip-top cursor-pointer"
             data-tip="twitter"
           >
             <FaTwitter />
           </div>
           <div
-            className="mx-3 hover:text-primary tooltip tooltip-bottom cursor-pointer"
+            className="mx-3 hover:text-primary tooltip tooltip-top cursor-pointer"
             data-tip="google"
           >
             <FaGoogle />
           </div>
           <div
-            className="mx-3 hover:text-primary tooltip tooltip-bottom cursor-pointer"
+            className="mx-3 hover:text-primary tooltip tooltip-top cursor-pointer"
             data-tip="linkedin"
           >
             <FaLinkedinIn />
           </div>
           <div
-            className="mx-3 hover:text-primary tooltip tooltip-bottom cursor-pointer"
+            className="mx-3 hover:text-primary tooltip tooltip-top cursor-pointer"
             data-tip="youtube"
           >
             <FaYoutube />
@@ -61,7 +61,7 @@ const HeaderTop = () => {
         </div>
         <div className="flex items-center my-2  md:hidden lg:flex">
           <div
-            className="hover:text-primary tooltip tooltip-bottom hidden lg:block cursor-pointer"
+            className="hover:text-primary tooltip tooltip-top hidden lg:block cursor-pointer"
             data-tip="checkout"
           >
             <BsFillBasketFill />

@@ -1,76 +1,67 @@
 [
   {
-    "id": "1",
-    "name": "DRILL",
-    "img": "https://i.ibb.co/BBmTfJ2/DRILL.png",
-    "customColor": "#266dfc"
-  },
-  {
-    "id": "2",
-    "name": "POLISHER",
-    "img": "https://i.ibb.co/4MmR3DQ/POLISHER.png",
+    "_id": "1",
+    "name": "impact compressed wrench",
+    "description": "1 impact wrench, compressed air nutrunner, 3260Nm, long model, W32 yellow",
+    "category": "Air Natrunner",
+    "seller": "",
+    "price": "33",
+    "stock": "99",
+    "img": "https://i.ibb.co/rKhV07z/1-impact-wrench-compressed-air-nutrunner-3260-Nm-long-model-W32-yellow-01176.jpg",
+    "ratings": [4, 3, 5, 1, 2],
+    "quantity": "0",
     "customColor": "#50a2d4"
   },
   {
-    "id": "3",
-    "name": "SAW",
-    "img": "https://i.ibb.co/7pWcqFL/SAW.png",
+    "_id": "2",
+    "name": "impact compressed wrench",
+    "description": "1 impact wrench, compressed air nutrunner, 3260Nm, long model, W32 yellow",
+    "category": "Air Natrunner",
+    "seller": "",
+    "price": "33",
+    "stock": "99",
+    "img": "https://i.ibb.co/rKhV07z/1-impact-wrench-compressed-air-nutrunner-3260-Nm-long-model-W32-yellow-01176.jpg",
+    "ratings": [4, 3, 5, 1, 4],
+    "quantity": "0",
+    "customColor": "#266dfc"
+  },
+  {
+    "_id": "3",
+    "name": "impact compressed wrench",
+    "description": "1 impact wrench, compressed air nutrunner, 3260Nm, long model, W32 yellow",
+    "category": "Air Natrunner",
+    "seller": "",
+    "price": "33",
+    "stock": "99",
+    "img": "https://i.ibb.co/rKhV07z/1-impact-wrench-compressed-air-nutrunner-3260-Nm-long-model-W32-yellow-01176.jpg",
+    "ratings": [4, 3, 5, 2, 2, 4],
+    "quantity": "0",
     "customColor": "#00ccbd"
   },
   {
-    "id": "4",
-    "name": "GRINDER",
-    "img": "https://i.ibb.co/z2dVsD1/GRINDER.png",
+    "_id": "4",
+    "name": "impact compressed wrench",
+    "description": "1 impact wrench, compressed air nutrunner, 3260Nm, long model, W32 yellow",
+    "category": "Air Natrunner",
+    "seller": "",
+    "price": "33",
+    "stock": "99",
+    "img": "https://i.ibb.co/rKhV07z/1-impact-wrench-compressed-air-nutrunner-3260-Nm-long-model-W32-yellow-01176.jpg",
+    "ratings": [4, 3, 3, 1, 2],
+    "quantity": "0",
     "customColor": "#18e792"
   },
   {
-    "id": "5",
-    "name": "HOSE-REEL",
-    "img": "https://i.ibb.co/1vPm2Kv/HOSE-REEL.png",
+    "_id": "5",
+    "name": "impact compressed wrench",
+    "description": "1 impact wrench, compressed air nutrunner, 3260Nm, long model, W32 yellow",
+    "category": "Air Natrunner",
+    "seller": "",
+    "price": "33",
+    "stock": "99",
+    "img": "https://i.ibb.co/rKhV07z/1-impact-wrench-compressed-air-nutrunner-3260-Nm-long-model-W32-yellow-01176.jpg",
+    "ratings": [4, 3, 5, 3, 2, 3],
+    "quantity": "0",
     "customColor": "#82cc33"
-  },
-  {
-    "id": "6",
-    "name": "NUTRUNNERS",
-    "img": "https://i.ibb.co/dQj53bs/AIT-NUTRUNNERS.png",
-    "customColor": "#d1c500"
-  },
-  {
-    "id": "7",
-    "name": "RIVET-GUN",
-    "img": "https://i.ibb.co/Lz1gQjr/RIVET-GUN.png",
-    "customColor": "#f1a62f"
-  },
-  {
-    "id": "8",
-    "name": "SOLDERING",
-    "img": "https://i.ibb.co/YX637z8/SOLDERING-IRON.png",
-    "customColor": "#fd6420"
-  },
-
-  {
-    "id": "9",
-    "name": "PLIERS",
-    "img": "https://i.ibb.co/MMW3KZN/PLIERS-CUTTERS.png",
-    "customColor": "#f521f3"
-  },
-  {
-    "id": "10",
-    "name": "SCREWDRIVER",
-    "img": "https://i.ibb.co/yShWzPG/SCREWDRIVER.png",
-    "customColor": "#c3047d"
-  },
-
-  {
-    "id": "11",
-    "name": "BALANCERS",
-    "img": "https://i.ibb.co/m6SpcrC/BALANCERS.png",
-    "customColor": "#9454ff"
-  },
-  {
-    "id": "12",
-    "name": "RENCH",
-    "img": "https://i.ibb.co/7X0x77c/RENCH.png",
-    "customColor": "#ea193b"
   }
 ]

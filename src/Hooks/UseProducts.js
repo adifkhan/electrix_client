@@ -8,7 +8,7 @@ const useProducts = () => {
       .then((data) => setProducts(data));
   }, [products.json]);
   //   console.log(products);
-  return { products, setProducts };
+  return [products, setProducts];
 };
 
 export default useProducts;

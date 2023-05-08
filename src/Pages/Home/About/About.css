@@ -1,0 +1,14 @@
+.about__container {
+  background-image: url(../../../images/aboutBG.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.pro__icons {
+  transition: scale 300ms;
+}
+.pro__details:hover .pro__icons {
+  scale: 1.4;
+}

@@ -1,6 +1,6 @@
 import React from "react";
-import useProducts from "../../../Hooks/UseProducts";
-import ProductCard from "./ProductCard";
+import useProductCatagories from "../../../Hooks/useProductCatagories";
+import CatagoryCard from "./CatagoryCard";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,10 +12,10 @@ import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper";
 
-import "./HomeProducts.css";
+import "./ProductCatagories.css";
 
-const HomeProduct = () => {
-  const { products } = useProducts();
+const ProductCatagories = () => {
+  const [catagories] = useProductCatagories();
 
   return (
     <div className="bg-secondary pt-12">
@@ -34,9 +34,9 @@ const HomeProduct = () => {
           modules={[Navigation]}
           className="productSwiper"
         >
-          {products.map((product) => (
-            <SwiperSlide key={product.id}>
-              <ProductCard product={product}></ProductCard>
+          {catagories.map((catagory) => (
+            <SwiperSlide key={catagory.id}>
+              <CatagoryCard catagory={catagory}></CatagoryCard>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -45,4 +45,4 @@ const HomeProduct = () => {
   );
 };
 
-export default HomeProduct;
+export default ProductCatagories;
