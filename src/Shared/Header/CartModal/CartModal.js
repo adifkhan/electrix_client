@@ -21,16 +21,18 @@ const CartModal = () => {
         <label className="modal-box pt-0" htmlFor="">
           <div className="sticky top-0 left-0 bg-white">
             <div className="flex justify-between items-center p-3">
-              <h3 className="font-bold text-lg text-secondary uppercase">
-                Cart Products
-              </h3>
-
               <label
                 htmlFor="cart-modal"
                 onClick={customNavigation}
                 className="btn btn-sm btn-secondary text-white"
               >
                 Check Out
+              </label>
+              <h3 className="font-bold text-lg text-secondary uppercase">
+                Cart Products
+              </h3>
+              <label htmlFor="cart-modal" className="btn btn-sm btn-circle">
+                ✕
               </label>
             </div>
             <div className="w-full h-[1px] bg-[gray] my-2"></div>

@@ -10,7 +10,7 @@ import {
 
 const HeaderTop = () => {
   return (
-    <div className="flex bg-secondary items-center justify-around">
+    <div className="flex bg-secondary items-center justify-around pb-10">
       <section className="flex flex-col lg:flex-row items-center justify-around lg:w-full text-base-100 py-4">
         <div className="flex items-center my-2">
           <div className="flex items-center mr-7 hover:text-primary">

@@ -10,7 +10,7 @@ const HomeBanner = () => {
         backgroundImage: `url(${bannerBg})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        marginTop: "-35px",
+        marginTop: "-30px",
       }}
     >
       <div className=" flex-1 flex flex-col justify-center items-center my-5">

@@ -1,0 +1,7 @@
+.test__menu {
+}
+.trapezium {
+  width: 35px;
+  border-top: 64px solid #c3002f;
+  border-right: 35px solid transparent;
+}

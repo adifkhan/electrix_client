@@ -9,17 +9,17 @@
   background: #002632;
 }
 
-.bg__navbar::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  right: -45px;
-  height: 50px;
-  width: 80px;
-  background: #002632;
-  transform: rotate(-60deg);
+.nav__trapezuim {
+  width: 35px;
+  border-top: 64px solid #c3002f;
+  border-right: 35px solid transparent;
 }
 
+.menu__toggle input:checked .menu__dropdown {
+  top: 64px;
+}
+
+/* menu list items style sheet starts here */
 .menu__list li a {
   position: relative;
   padding: 2px 5px;
@@ -56,15 +56,4 @@
   opacity: 1;
   left: -15px;
 }
-.navbar__toggler {
-  padding: 5px;
-  cursor: pointer;
-  display: grid;
-}
-.navbar__toggler .bar {
-  width: 25px;
-  height: 4px;
-  margin-bottom: 4px;
-  background: white;
-  border-radius: 15%;
-}
+/* menu list items style sheet ends here */
