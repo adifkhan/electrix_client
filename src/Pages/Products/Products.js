@@ -1,18 +1,26 @@
-import React from "react";
 import useProducts from "../../Hooks/useProducts";
 import ProductCard from "./ProductCart/ProductCart";
+import { addToDb } from "../../Shared/Components/LocalStorage";
+import useProductCatagories from "../../Hooks/useProductCatagories";
+import useCart from "../../Hooks/useCart";
 
 const Products = () => {
   const [products] = useProducts();
+  const [categories] = useProductCatagories();
+  const [cart, setCart] = useCart();
 
-  const addToCart = (selectedProduct) => {
-    console.log("added");
+  // function for adding products to the cart starts here //
+  const handleAddToCart = async (newProduct) => {
+    const newCart = [...cart, newProduct];
+    setCart(newCart);
+    addToDb(newProduct._id);
   };
+  // function for adding products to the cart ends here //
 
   return (
     <div className="bg-[#002632] mt-[-35px] px-5 py-14 min-[376px]:px-10 sm:px-14">
       <div className="flex">
-        <div className="w-[350px]  pr-5 relative hidden sm:block">
+        <div className="w-[350px]  pr-5 hidden sm:block">
           <div className="form-control my-8">
             <div className="input-group">
               <input
@@ -38,10 +46,27 @@ const Products = () => {
               </button>
             </div>
           </div>
-          <div className="bg-white p-5 rounded-lg sticky top-0 right-0">
-            <h2 className="text-lg font-semibold text-center underline">
-              Cart Summary
+          <div className="bg-white p-5 rounded-lg">
+            <h2 className="text-xl font-bold text-center">
+              Products Categories :
             </h2>
+            <div>
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  className="border my-2 hover:bg-slate-300"
+                >
+                  <ul className="list-disc ml-8">
+                    <li className="m-2 cursor-pointer">{category.name}</li>
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <div className="mt-5">
+              <h1 className="text-xl font-bold text-center">
+                Popular Products :
+              </h1>
+            </div>
           </div>
         </div>
         <div className="mx-auto">
@@ -56,7 +81,7 @@ const Products = () => {
                 <ProductCard
                   key={product._id}
                   product={product}
-                  addToCart={addToCart}
+                  handleAddToCart={handleAddToCart}
                 ></ProductCard>
               ))}
             </div>

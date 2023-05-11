@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { signOut } from "firebase/auth";
+import { getStoredCart } from "../Components/LocalStorage";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
@@ -17,6 +18,11 @@ const Navbar = () => {
     signOut(auth);
     setAccountToggle(false);
   };
+
+  // claculate the total amount of product in the cart //
+  const shopppingCart = getStoredCart();
+  const cartProducts = Object.values(shopppingCart);
+  const totalCartProducts = cartProducts.reduce((a, b) => a + b, 0);
 
   return (
     <div className="nav__container uppercase relative z-20">
@@ -34,13 +40,20 @@ const Navbar = () => {
             <img className="img w-24 sm:w-32" src={logo} alt="" />
           </Link>
         </div>
-        <div>
-          <div
-            className="text-base-100 md:mr-4 tooltip tooltip-left z-10 cursor-pointer"
-            data-tip="checkout"
-          >
-            <BsFillBasketFill />
-          </div>
+        <div className="mr-8">
+          <label htmlFor="cart-modal" className="indicator">
+            <span className="indicator-item badge badge-neutral h-3 text-xs">
+              {totalCartProducts}
+            </span>
+            <div className="grid w-8 h-8 place-items-center">
+              <div
+                className="text-base-100  tooltip tooltip-left text-xl z-10 cursor-pointer"
+                data-tip="checkout"
+              >
+                <BsFillBasketFill />
+              </div>
+            </div>
+          </label>
         </div>
       </div>
       <div className="bg__navbar hidden lg:flex justify-between items-center h-16 mx-28 px-10 bg-primary relative overflow-hidden">
@@ -68,7 +81,22 @@ const Navbar = () => {
             </li>
           </ul>
         </section>
-        <section>
+        <section className="flex items-center ">
+          <div className="mr-8">
+            <label htmlFor="cart-modal" className="indicator">
+              <span className="indicator-item badge badge-neutral h-3 text-xs">
+                {totalCartProducts}
+              </span>
+              <div className="grid w-8 h-8 place-items-center">
+                <div
+                  className="text-base-100  tooltip tooltip-left text-xl z-10 cursor-pointer"
+                  data-tip="checkout"
+                >
+                  <BsFillBasketFill />
+                </div>
+              </div>
+            </label>
+          </div>
           {user ? (
             <div
               onClick={() => setAccountToggle(!accountToggle)}

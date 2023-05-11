@@ -1,7 +1,7 @@
 import React from "react";
-import RatingsReviews from "./Ratings/RatingsReviews";
+import RatingsReviews from "../Ratings/RatingsReviews";
 
-const ProductCart = ({ product, addToCart }) => {
+const ProductCart = ({ product, handleAddToCart }) => {
   const { _id, name, description, img, price, category, ratings, customColor } =
     product;
 
@@ -33,7 +33,7 @@ const ProductCart = ({ product, addToCart }) => {
 
         <div className="">
           <button
-            onClick={() => addToCart(product)}
+            onClick={() => handleAddToCart(product)}
             className="btn btn-outline btn-secondary w-full"
           >
             add to cart
