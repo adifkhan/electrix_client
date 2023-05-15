@@ -1,7 +1,7 @@
-.test__menu {
-}
-.trapezium {
-  width: 35px;
-  border-top: 64px solid #c3002f;
-  border-right: 35px solid transparent;
+.breadCrumbs {
+  background-image: url(../../images/breadcrumb-bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }

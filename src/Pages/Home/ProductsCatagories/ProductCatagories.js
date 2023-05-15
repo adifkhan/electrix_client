@@ -35,7 +35,7 @@ const ProductCatagories = () => {
           className="productSwiper"
         >
           {catagories.map((catagory) => (
-            <SwiperSlide key={catagory.id}>
+            <SwiperSlide key={catagory._id}>
               <CatagoryCard catagory={catagory}></CatagoryCard>
             </SwiperSlide>
           ))}

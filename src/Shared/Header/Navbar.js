@@ -106,20 +106,19 @@ const Navbar = () => {
                 <div className="w-8 rounded-full ring ring-primary ring-offset-secondary ring-offset-2">
                   <img src={user.photoURL} alt="" />
                 </div>
-                <section>
-                  <ul
-                    className={`menu__list grid grid-cols-1 w-36 bg-secondary gap-3 fs-bold text-white text-xs font-semibold absolute top-[48px]  pl-3 sm:pl-7 py-4 ease-in-out duration-200 ${
-                      accountToggle ? "right-0" : "right-[-300px] hidden"
-                    }`}
-                  >
-                    <li>
-                      <Link to="">My Profile</Link>
-                    </li>
-                    <li>
-                      <Link onClick={handleSignOut}>sign out</Link>
-                    </li>
-                  </ul>
-                </section>
+
+                <ul
+                  className={`menu__list grid grid-cols-1 w-36 bg-secondary gap-3 fs-bold text-white text-xs font-semibold absolute top-[48px]  pl-3 sm:pl-7 py-4 ease-in-out duration-200 z-30 ${
+                    accountToggle ? "right-0" : "right-[-300px] hidden"
+                  }`}
+                >
+                  <li>
+                    <Link to="">My Profile</Link>
+                  </li>
+                  <li>
+                    <Link onClick={handleSignOut}>sign out</Link>
+                  </li>
+                </ul>
               </div>
             ) : (
               <Button>

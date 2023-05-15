@@ -32,7 +32,7 @@ export default function App() {
         className="mySwiper"
       >
         {catagories.map((catagory) => (
-          <SwiperSlide key={catagory.id}>
+          <SwiperSlide key={catagory._id}>
             {" "}
             {
               <img

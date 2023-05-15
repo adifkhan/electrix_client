@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 const useProductCatagories = () => {
   const [catagories, setCatagories] = useState([]);
   useEffect(() => {
-    fetch("productCatagories.json")
+    fetch("http://localhost:5000/categories")
       .then((res) => res.json())
       .then((data) => setCatagories(data));
-  }, [catagories.json]);
+  }, []);
   //   console.log(products);
   return [catagories, setCatagories];
 };

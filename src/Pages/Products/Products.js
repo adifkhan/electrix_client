@@ -3,6 +3,9 @@ import ProductCard from "./ProductCart/ProductCart";
 import { addToDb } from "../../Shared/Components/LocalStorage";
 import useProductCatagories from "../../Hooks/useProductCatagories";
 import useCart from "../../Hooks/useCart";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import Button from "../../Shared/Components/Button";
 
 const Products = () => {
   const [products] = useProducts();
@@ -10,16 +13,36 @@ const Products = () => {
   const [cart, setCart] = useCart();
 
   // function for adding products to the cart starts here //
-  const handleAddToCart = async (newProduct) => {
-    const newCart = [...cart, newProduct];
-    setCart(newCart);
-    addToDb(newProduct._id);
+  const handleAddToCart = (newProduct) => {
+    const inCart = cart.find((item) => item._id === newProduct._id);
+    if (!inCart) {
+      const newCart = [...cart, newProduct];
+      setCart(newCart);
+      addToDb(newProduct._id);
+      toast(newProduct.name, "is added in Your Cart !");
+    } else {
+      toast.error("This Product is Already in Your Cart !");
+    }
   };
   // function for adding products to the cart ends here //
 
   return (
-    <div className="bg-[#002632] mt-[-35px] px-5 py-14 min-[376px]:px-10 sm:px-14">
-      <div className="flex">
+    <div className="bg-[#002632]">
+      <div className="breadCrumbs text-accent flex flex-col items-center pt-16 pb-10 mt-[-30px]">
+        <p className="text-3xl font-semibold uppercase">Products</p>
+        <div className="text-sm font-medium  breadcrumbs">
+          <ul>
+            <li>
+              <Link>Home</Link>
+            </li>
+            <li>
+              <Link>Products</Link>
+            </li>
+            <li>Category</li>
+          </ul>
+        </div>
+      </div>
+      <div className="flex px-5 min-[376px]:px-10 sm:px-10 md:pr-1">
         <div className="w-[350px]  pr-5 hidden sm:block">
           <div className="form-control my-8">
             <div className="input-group">
@@ -50,18 +73,31 @@ const Products = () => {
             <h2 className="text-xl font-bold text-center">
               Products Categories :
             </h2>
-            <div>
+            <ul>
+              <li className="flex items-center my-2 border-2 p-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="radio-2"
+                  className="radio radio-secondary radio-sm"
+                />
+                <span className="text-sm font-medium ml-3">All Category</span>
+              </li>
               {categories.map((category) => (
-                <div
-                  key={category.id}
-                  className="border my-2 hover:bg-slate-300"
+                <li
+                  key={category._id}
+                  className="flex items-center my-2 border-2 p-2 cursor-pointer"
                 >
-                  <ul className="list-disc ml-8">
-                    <li className="m-2 cursor-pointer">{category.name}</li>
-                  </ul>
-                </div>
+                  <input
+                    type="radio"
+                    name="radio-2"
+                    className="radio radio-secondary radio-sm"
+                  />
+                  <span className="text-sm font-medium ml-3">
+                    {category.name}
+                  </span>
+                </li>
               ))}
-            </div>
+            </ul>
             <div className="mt-5">
               <h1 className="text-xl font-bold text-center">
                 Popular Products :
@@ -69,22 +105,23 @@ const Products = () => {
             </div>
           </div>
         </div>
-        <div className="mx-auto">
-          <div>
-            <div>
-              <h1 className="mt-[-18] mb-8 text-primary text-center font-bold text-2xl lg:text-3xl ">
-                Our Best Products
-              </h1>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-              {products.map((product) => (
-                <ProductCard
-                  key={product._id}
-                  product={product}
-                  handleAddToCart={handleAddToCart}
-                ></ProductCard>
-              ))}
-            </div>
+        <div className="mx-auto px-2">
+          <div className="flex flex-col lg:flex-row justify-between items-center my-8">
+            <h1 className="mt-[-18] mb-8 text-primary text-center font-bold text-2xl lg:text-3xl ">
+              Our Best Products
+            </h1>
+            <Link to="/addproduct">
+              <Button>+ Add New Product</Button>
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            {products.map((product) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+                handleAddToCart={handleAddToCart}
+              ></ProductCard>
+            ))}
           </div>
         </div>
       </div>
