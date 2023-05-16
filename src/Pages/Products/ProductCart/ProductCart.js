@@ -10,7 +10,7 @@ const ProductCart = ({ product, handleAddToCart }) => {
   );
 
   return (
-    <div className="card rounded max-w-[350px] card-compact bg-base-100 shadow-xl relative">
+    <div className="card rounded max-w-[350px] card-compact bg-base-100 shadow-xl relative mx-auto">
       <figure>
         <img src={img} alt="Shoes" />
       </figure>
@@ -21,16 +21,13 @@ const ProductCart = ({ product, handleAddToCart }) => {
         <p>$ {price}</p>
       </div>
       <div className="card-body">
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-semibold">{category}</h2>
-          <div className="flex">
-            <RatingsReviews key={_id} ratings={stars} />
-            <small className="pl-2">({ratings.length} reviews)</small>
-          </div>
-        </div>
+        <h2 className="text-md font-semibold">{category}</h2>
         <h2 className="card-title justify-center">{name}</h2>
         <p className="text-center">{description}</p>
-
+        <div className="flex justify-between items-center w-full">
+          <RatingsReviews key={_id} ratings={stars} />
+          <small className="pl-2">({ratings.length} reviews)</small>
+        </div>
         <div className="">
           <button
             onClick={() => handleAddToCart(product)}

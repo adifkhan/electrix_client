@@ -1,4 +1,3 @@
-import useProducts from "../../Hooks/useProducts";
 import ProductCard from "./ProductCart/ProductCart";
 import { addToDb } from "../../Shared/Components/LocalStorage";
 import useProductCatagories from "../../Hooks/useProductCatagories";
@@ -6,11 +5,24 @@ import useCart from "../../Hooks/useCart";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../Shared/Components/Button";
+import { useEffect, useState } from "react";
 
 const Products = () => {
-  const [products] = useProducts();
   const [categories] = useProductCatagories();
+  const [selectedCategory, setSelectedCategory] = useState("ALL-CATEGORY");
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useCart();
+
+  // load product according to the selected category //
+  const handleProductLoading = (categoryName) => {
+    setSelectedCategory(categoryName);
+  };
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/products?category=${selectedCategory}`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, [selectedCategory]);
 
   // function for adding products to the cart starts here //
   const handleAddToCart = (newProduct) => {
@@ -73,31 +85,33 @@ const Products = () => {
             <h2 className="text-xl font-bold text-center">
               Products Categories :
             </h2>
-            <ul>
-              <li className="flex items-center my-2 border-2 p-2 cursor-pointer">
+            <div>
+              <label className="flex items-center my-2 border-2 p-2 cursor-pointer">
                 <input
                   type="radio"
-                  name="radio-2"
+                  name="category"
                   className="radio radio-secondary radio-sm"
+                  onChange={() => handleProductLoading("ALL-CATEGORY")}
                 />
                 <span className="text-sm font-medium ml-3">All Category</span>
-              </li>
+              </label>
               {categories.map((category) => (
-                <li
+                <label
                   key={category._id}
                   className="flex items-center my-2 border-2 p-2 cursor-pointer"
                 >
                   <input
                     type="radio"
-                    name="radio-2"
+                    name="category"
                     className="radio radio-secondary radio-sm"
+                    onChange={() => handleProductLoading(category.name)}
                   />
                   <span className="text-sm font-medium ml-3">
                     {category.name}
                   </span>
-                </li>
+                </label>
               ))}
-            </ul>
+            </div>
             <div className="mt-5">
               <h1 className="text-xl font-bold text-center">
                 Popular Products :
@@ -105,16 +119,16 @@ const Products = () => {
             </div>
           </div>
         </div>
-        <div className="mx-auto px-2">
-          <div className="flex flex-col lg:flex-row justify-between items-center my-8">
+        <div className="mx-auto px-3 w-full">
+          <div className="flex flex-col lg:flex-row justify-between items-center my-8 px-8 w-full">
             <h1 className="mt-[-18] mb-8 text-primary text-center font-bold text-2xl lg:text-3xl ">
               Our Best Products
             </h1>
             <Link to="/addproduct">
-              <Button>+ Add New Product</Button>
+              <Button>+ Add Product</Button>
             </Link>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 min-[890px]:grid-cols-2 min-[1200px]:grid-cols-3 gap-5">
             {products.map((product) => (
               <ProductCard
                 key={product._id}

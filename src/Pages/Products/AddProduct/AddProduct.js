@@ -100,8 +100,30 @@ const AddProduct = () => {
                   type="text"
                   placeholder="Product Name"
                   className="input input-bordered w-full"
-                  {...register("name", { required: true })}
+                  {...register("name", {
+                    required: true,
+                    minLength: {
+                      value: 12,
+                      message: "Must be 6 characters or longer",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Maximum Characters 16",
+                    },
+                  })}
                 />
+              </label>
+              <label className="label">
+                {errors.name?.type === "minLength" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.name.message}
+                  </span>
+                )}
+                {errors.name?.type === "maxLength" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.name.message}
+                  </span>
+                )}
               </label>
             </div>
             <div>
@@ -153,8 +175,30 @@ const AddProduct = () => {
               <textarea
                 className="textarea textarea-bordered h-24"
                 placeholder="Product Description"
-                {...register("description", { required: true })}
+                {...register("description", {
+                  required: true,
+                  minLength: {
+                    value: 50,
+                    message: "Must be 6 characters or longer",
+                  },
+                  maxLength: {
+                    value: 80,
+                    message: "Maximum Characters 16",
+                  },
+                })}
               ></textarea>
+              <label className="label">
+                {errors.description?.type === "minLength" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.description.message}
+                  </span>
+                )}
+                {errors.description?.type === "maxLength" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.description.message}
+                  </span>
+                )}
+              </label>
             </div>
             <div className="form-control">
               <label className="label">
