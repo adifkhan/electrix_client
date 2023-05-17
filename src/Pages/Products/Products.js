@@ -1,17 +1,18 @@
 import ProductCard from "./ProductCart/ProductCart";
-import { addToDb } from "../../Shared/Components/LocalStorage";
 import useProductCatagories from "../../Hooks/useProductCatagories";
-import useCart from "../../Hooks/useCart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../Shared/Components/Button";
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const Products = () => {
   const [categories] = useProductCatagories();
   const [selectedCategory, setSelectedCategory] = useState("ALL-CATEGORY");
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useCart();
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
   // load product according to the selected category //
   const handleProductLoading = (categoryName) => {
@@ -26,7 +27,32 @@ const Products = () => {
 
   // function for adding products to the cart starts here //
   const handleAddToCart = (newProduct) => {
-    const inCart = cart.find((item) => item._id === newProduct._id);
+    if (user) {
+      const cartProduct = {
+        email: user.email,
+        productId: newProduct._id,
+        name: newProduct.name,
+        category: newProduct.category,
+        price: newProduct.price,
+        img: newProduct.img,
+        seller: newProduct.seller,
+        shipping: newProduct.shipping,
+        quantity: 1,
+      };
+      fetch(`http://localhost:5000/add-to-cart?email=${user.email}`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(cartProduct),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    } else {
+      navigate("/login");
+    }
+
+    /* const inCart = cart.find((item) => item._id === newProduct._id);
     if (!inCart) {
       const newCart = [...cart, newProduct];
       setCart(newCart);
@@ -34,7 +60,7 @@ const Products = () => {
       toast(newProduct.name, "is added in Your Cart !");
     } else {
       toast.error("This Product is Already in Your Cart !");
-    }
+    } */
   };
   // function for adding products to the cart ends here //
 

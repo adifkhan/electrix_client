@@ -7,22 +7,25 @@ import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { signOut } from "firebase/auth";
-import { getStoredCart } from "../Components/LocalStorage";
+import useCart from "../../Hooks/useCart";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
   const [accountToggle, setAccountToggle] = useState(false);
   const [user] = useAuthState(auth);
+  const [cart] = useCart();
 
   const handleSignOut = () => {
     signOut(auth);
+    localStorage.removeItem("accessToken");
     setAccountToggle(false);
   };
 
   // claculate the total amount of product in the cart //
-  const shopppingCart = getStoredCart();
-  const cartProducts = Object.values(shopppingCart);
-  const totalCartProducts = cartProducts.reduce((a, b) => a + b, 0);
+  let totalCartProducts = 0;
+  cart.forEach((item) => {
+    totalCartProducts = totalCartProducts + item.quantity;
+  });
 
   return (
     <nav className="uppercase mt-[-35px]">

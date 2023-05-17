@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useSendEmailVerification,
@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { signOut } from "firebase/auth";
 import Loading from "../../Shared/Components/Loading";
 import loginBg from "../../images/login-bg.jpg";
+import useToken from "./useToken";
 
 const SignUp = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -27,12 +28,16 @@ const SignUp = () => {
     handleSubmit,
   } = useForm();
 
+  const [userRole, setUserRole] = useState("buyer");
+  const [token] = useToken(user || gUser, userRole);
+
   useEffect(() => {
-    if (user || gUser) {
+    if (token) {
       signOut(auth);
+      localStorage.removeItem("accessToken");
       navigate("/login");
     }
-  }, [user, gUser, navigate]);
+  }, [token, navigate]);
 
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
@@ -137,6 +142,32 @@ const SignUp = () => {
                   </span>
                 )}
               </label>
+            </div>
+            <div>
+              <p>
+                As a{" "}
+                <label className="flex items-center my-2 border-2 p-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="usertype"
+                    value="buyer"
+                    checked
+                    className="radio radio-secondary radio-sm"
+                    onChange={(e) => setUserRole(e.target.value)}
+                  />
+                  <span className="text-sm font-medium ml-3">Buyer</span>
+                </label>
+                <label className="flex items-center my-2 border-2 p-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="usertype"
+                    value="seller"
+                    className="radio radio-secondary radio-sm"
+                    onChange={(e) => setUserRole(e.target.value)}
+                  />
+                  <span className="text-sm font-medium ml-3">Seller</span>
+                </label>
+              </p>
             </div>
             <div className="form-control w-full max-w-xs">
               <label className="label">

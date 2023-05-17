@@ -1,12 +1,7 @@
 import React from "react";
 import useCart from "../../../Hooks/useCart";
 import { useNavigate } from "react-router-dom";
-import {
-  FaCaretUp,
-  FaCaretDown,
-  FaRegTrashAlt,
-  FaCartPlus,
-} from "react-icons/fa";
+import { FaRegTrashAlt, FaCartPlus } from "react-icons/fa";
 
 const CartModal = () => {
   const [cart] = useCart();
@@ -50,7 +45,7 @@ const CartModal = () => {
                   key={item._id}
                   className="flex flex-col sm:flex-row p-3 items-center bg-white border rounded-xl w-full my-2 mx-auto relative"
                 >
-                  <img className="w-20 mr-5" src={item.img} alt="" />
+                  <img className="w-12 h-12 mr-5" src={item.img} alt="" />
                   <div>
                     <p className="font-semibold">{item.name}</p>
                     <div className="flex justify-between font-semibold">

@@ -8,6 +8,7 @@ import {
 import auth from "../../firebase.init";
 import Loading from "../../Shared/Components/Loading";
 import loginBg from "../../images/login-bg.jpg";
+import useToken from "./useToken";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,12 +24,13 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const [token] = useToken(user || gUser);
 
   useEffect(() => {
-    if (user || gUser) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [user, gUser, from, navigate]);
+  }, [token, from, navigate]);
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
   };

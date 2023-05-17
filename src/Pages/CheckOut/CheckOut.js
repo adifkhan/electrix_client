@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
 import { FaCaretUp, FaCaretDown, FaRegTrashAlt } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import Button from "../../Shared/Components/Button";
 
 const CheckOut = () => {
   const [cart] = useCart();

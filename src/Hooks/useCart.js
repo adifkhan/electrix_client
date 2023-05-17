@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
-import useProducts from "./useProducts";
-import { getStoredCart } from "../Shared/Components/LocalStorage";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../firebase.init";
 
 const useCart = () => {
-  const [products] = useProducts();
   const [cart, setCart] = useState([]);
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
-    const shoppingCart = getStoredCart();
-    const savedCart = [];
-    for (const id in shoppingCart) {
-      const cartProducts = products.find((product) => product._id === id);
-      if (cartProducts) {
-        cartProducts.quantity = shoppingCart[id];
-        savedCart.push(cartProducts);
-      }
-    }
-    setCart(savedCart);
-  }, [products]);
+    if (user) {
+      const email = user.email;
 
-  return [cart, setCart];
+      fetch(`http://localhost:5000/product-cart?email=${email}`)
+        .then((res) => res.json())
+        .then((data) => setCart(data));
+    }
+  }, [user]);
+
+  return [cart];
 };
 
 export default useCart;
