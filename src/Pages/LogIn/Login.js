@@ -5,10 +5,10 @@ import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
+import auth from "../../Firebase/firebase.init";
 import Loading from "../../Shared/Components/Loading";
 import loginBg from "../../images/login-bg.jpg";
-import useToken from "./useToken";
+import useToken from "../../Hooks/useToken";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -135,7 +135,7 @@ const Login = () => {
             </div>
             {errorMessage}
             <small>
-              <Link className="text-accent font-semibold" to="/resetpass">
+              <Link className="text-accent font-semibold" to="/resetpassword">
                 Forgot Password?
               </Link>
             </small>

@@ -1,53 +1,56 @@
 import React from "react";
-import "./CheckOut.css";
-import { Link } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
 import { FaCaretUp, FaCaretDown, FaRegTrashAlt } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import BreadCrumbs from "../../Shared/Components/BreadCrumbs";
+import useUser from "../../Hooks/useUser";
+import Loading from "../../Shared/Components/Loading";
 
 const CheckOut = () => {
-  const [cart] = useCart();
+  const [cart, isLoading] = useCart();
+  const [userInfo] = useUser();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
+  if (isLoading) {
+    return <Loading />;
+  }
   //Calculation of the total amount to pay for user orders  starts here //
   let subTotal = 0;
   let shippingCost = 0;
-  cart.forEach((item) => {
+  cart?.forEach((item) => {
     const total = item.quantity * item.price;
     const shipping = item.shipping * 1;
     subTotal = subTotal + total;
     shippingCost = shippingCost + shipping;
   });
-  const tax = (subTotal / 100) * 15;
+  const tax = parseFloat(((subTotal / 100) * 15).toFixed(2));
   const grandTotal = subTotal + shippingCost + tax;
   //Calculation of the total amount to pay for user orders  ends here //
 
+  const onSubmit = () => {
+    console.log("proceed!");
+  };
   return (
     <div>
-      <section className="breadCrumbs text-accent flex flex-col items-center pt-16 pb-10 mt-[-30px]">
-        <p className="text-3xl font-semibold uppercase">Check Out</p>
-        <div className="text-sm font-medium  breadcrumbs">
-          <ul>
-            <li>
-              <Link>Products</Link>
-            </li>
-            <li>
-              <Link>Cart</Link>
-            </li>
-            <li>Checkout</li>
-          </ul>
-        </div>
-      </section>
+      <BreadCrumbs
+        breadcrumb={{
+          page: "Check-Out",
+          bread: [
+            { name: "Home", address: "/" },
+            { name: "Products", address: "/products" },
+          ],
+        }}
+      ></BreadCrumbs>
       <section className="flex flex-col md:flex-row justify-around w-full p-5">
         <section className="grid grid-cols-1 w-full">
           <h2 className="text-center font-semibold text-xl my-3">
             Your Orders
           </h2>
-          {cart.map((item) => (
+          {cart?.map((item) => (
             <div
               key={item._id}
               className="flex flex-col sm:flex-row items-center bg-white border-2  w-full max-w-sm my-2 mx-auto relative"
@@ -119,47 +122,20 @@ const CheckOut = () => {
             <h3 className="text-center font-semibold text-xl my-3">
               Please fill up the Form
             </h3>
-            <form className="w-full flex flex-col items-center">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="w-full flex flex-col items-center"
+            >
               <div className="form-control w-full max-w-xs">
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="Your Name"
+                  placeholder={userInfo.displayName}
                   className="input input-bordered w-full max-w-xs"
-                  {...register("name", {
-                    required: {
-                      value: true,
-                      message: "name is required",
-                    },
-                    minLength: {
-                      value: 4,
-                      message: "Must be longer than 4 characters",
-                    },
-                    maxLength: {
-                      value: 20,
-                      message: "Must be shorter than 20 characters",
-                    },
-                  })}
+                  {...register("name")}
                 />
-                <label className="label">
-                  {errors.name?.type === "required" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.name.message}
-                    </span>
-                  )}
-                  {errors.name?.type === "minLength" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.name.message}
-                    </span>
-                  )}
-                  {errors.name?.type === "maxLength" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.name.message}
-                    </span>
-                  )}
-                </label>
               </div>
 
               <div className="form-control w-full max-w-xs">
@@ -168,76 +144,36 @@ const CheckOut = () => {
                 </label>
                 <input
                   type="email"
-                  placeholder="Your Email"
+                  placeholder={userInfo.email}
                   className="input input-bordered w-full max-w-xs"
-                  {...register("email", {
-                    required: {
-                      value: true,
-                      message: "email is required",
-                    },
-                    pattern: {
-                      value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                      message: "Provide a valid Email",
-                    },
-                  })}
+                  {...register("email")}
                 />
-                <label className="label">
-                  {errors.email?.type === "required" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.email.message}
-                    </span>
-                  )}
-                  {errors.email?.type === "pattern" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.email.message}
-                    </span>
-                  )}
-                </label>
               </div>
               <div className="form-control w-full max-w-xs">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text">Address</span>
                 </label>
                 <input
-                  type="password"
-                  placeholder="Password"
+                  type="text"
+                  placeholder={userInfo.address}
                   className="input input-bordered w-full max-w-xs"
-                  {...register("password", {
-                    required: {
-                      value: true,
-                      message: "Password is required",
-                    },
-                    minLength: {
-                      value: 6,
-                      message: "Must be 6 characters or longer",
-                    },
-                    maxLength: {
-                      value: 16,
-                      message: "Maximum Characters 16",
-                    },
-                  })}
+                  {...register("address")}
                 />
+              </div>
+              <div className="form-control w-full max-w-xs">
                 <label className="label">
-                  {errors.password?.type === "required" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.password.message}
-                    </span>
-                  )}
-                  {errors.password?.type === "minLength" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.password.message}
-                    </span>
-                  )}
-                  {errors.password?.type === "maxLength" && (
-                    <span className="label-text-alt text-red-500">
-                      {errors.password.message}
-                    </span>
-                  )}
+                  <span className="label-text">Phone No</span>
                 </label>
+                <input
+                  type="number"
+                  placeholder={userInfo.phone}
+                  className="input input-bordered w-full max-w-xs"
+                  {...register("phone")}
+                />
               </div>
 
               <input
-                className="btn btn-secondary text-white w-full max-w-xs"
+                className="btn btn-secondary text-white w-full mt-2 max-w-xs"
                 type="submit"
                 value="proceed"
               />

@@ -1,17 +1,23 @@
 import ProductCard from "./ProductCart/ProductCart";
 import useProductCatagories from "../../Hooks/useProductCatagories";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Button from "../../Shared/Components/Button";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
+import auth from "../../Firebase/firebase.init";
+import useUser from "../../Hooks/useUser";
+import Loading from "../../Shared/Components/Loading";
+import { toast } from "react-toastify";
+import BreadCrumbs from "../../Shared/Components/BreadCrumbs";
+import useCart from "../../Hooks/useCart";
 
 const Products = () => {
   const [categories] = useProductCatagories();
   const [selectedCategory, setSelectedCategory] = useState("ALL-CATEGORY");
   const [products, setProducts] = useState([]);
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+  const [userInfo] = useUser();
+  const [refetch] = useCart();
   const navigate = useNavigate();
 
   // load product according to the selected category //
@@ -36,18 +42,25 @@ const Products = () => {
         price: newProduct.price,
         img: newProduct.img,
         seller: newProduct.seller,
+        sellerId: newProduct.sellerId,
         shipping: newProduct.shipping,
         quantity: 1,
       };
-      fetch(`http://localhost:5000/add-to-cart?email=${user.email}`, {
+      fetch(`http://localhost:5000/addtocart?email=${user.email}`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(cartProduct),
       })
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          if (data.acknowledged === true) {
+            toast.success(`${newProduct.name} is added to cart!`);
+            refetch();
+          }
+        });
     } else {
       navigate("/login");
     }
@@ -63,23 +76,17 @@ const Products = () => {
     } */
   };
   // function for adding products to the cart ends here //
-
+  if (loading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="bg-[#002632]">
-      <div className="breadCrumbs text-accent flex flex-col items-center pt-16 pb-10 mt-[-30px]">
-        <p className="text-3xl font-semibold uppercase">Products</p>
-        <div className="text-sm font-medium  breadcrumbs">
-          <ul>
-            <li>
-              <Link>Home</Link>
-            </li>
-            <li>
-              <Link>Products</Link>
-            </li>
-            <li>Category</li>
-          </ul>
-        </div>
-      </div>
+      <BreadCrumbs
+        breadcrumb={{
+          page: "Products",
+          bread: [{ name: "Home", address: "/" }],
+        }}
+      ></BreadCrumbs>
       <div className="flex px-5 min-[376px]:px-10 sm:px-10 md:pr-1">
         <div className="w-[350px]  pr-5 hidden sm:block">
           <div className="form-control my-8">
@@ -150,11 +157,13 @@ const Products = () => {
             <h1 className="mt-[-18] mb-8 text-primary text-center font-bold text-2xl lg:text-3xl ">
               Our Best Products
             </h1>
-            <Link to="/addproduct">
-              <Button>+ Add Product</Button>
-            </Link>
+            {userInfo.role === "seller" && (
+              <Link to="/addproduct">
+                <Button>+ Add Product</Button>
+              </Link>
+            )}
           </div>
-          <div className="grid grid-cols-1 min-[890px]:grid-cols-2 min-[1200px]:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 min-[890px]:grid-cols-2 min-[1200px]:grid-cols-3 gap-8">
             {products.map((product) => (
               <ProductCard
                 key={product._id}

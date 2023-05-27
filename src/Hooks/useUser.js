@@ -1,26 +1,26 @@
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../Firebase/firebase.init";
-import { getToken, logOut } from "../Shared/Components/utilities";
-import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { logOut } from "../Shared/Components/utilities";
 
-const useCart = () => {
+const useUser = () => {
   const [user] = useAuthState(auth);
-  const token = getToken();
   const navigate = useNavigate();
 
   const {
-    data: cart = [],
+    data: userInfo = {},
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["mycart", user?.email],
+    queryKey: ["user", user?.email],
     queryFn: async () => {
       const response = await fetch(
-        `http://localhost:5000/mycart?email=${user?.email}`,
+        `http://localhost:5000/user?email=${user?.email}`,
         {
           headers: {
-            authorization: `Bearer ${token}`,
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
         }
       );
@@ -33,7 +33,7 @@ const useCart = () => {
     },
   });
 
-  return [cart, isLoading, refetch];
+  return [userInfo, isLoading, refetch];
 };
 
-export default useCart;
+export default useUser;

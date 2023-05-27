@@ -5,15 +5,17 @@ import {
   useSignInWithGoogle,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
+import auth from "../../Firebase/firebase.init";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { signOut } from "firebase/auth";
 import Loading from "../../Shared/Components/Loading";
 import loginBg from "../../images/login-bg.jpg";
-import useToken from "./useToken";
+import useToken from "../../Hooks/useToken";
 
 const SignUp = () => {
+  const [checkPass, setCheckPass] = useState("");
+  const [checkConfirmPass, setCheckConfirmPass] = useState("");
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [sendEmailVerification, sending] = useSendEmailVerification(auth);
   const navigate = useNavigate();
@@ -39,12 +41,14 @@ const SignUp = () => {
     }
   }, [token, navigate]);
 
+  let errorMessage;
+
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
     await sendEmailVerification();
   };
-  let errorMessage;
+
   if (gLoading || loading || updating || sending) {
     return <Loading />;
   }
@@ -83,8 +87,8 @@ const SignUp = () => {
                     message: "name is required",
                   },
                   minLength: {
-                    value: 4,
-                    message: "Must be longer than 4 characters",
+                    value: 8,
+                    message: "Must be longer than 8 characters",
                   },
                   maxLength: {
                     value: 20,
@@ -110,7 +114,6 @@ const SignUp = () => {
                 )}
               </label>
             </div>
-
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -177,6 +180,7 @@ const SignUp = () => {
                 type="password"
                 placeholder="Password"
                 className="input input-bordered w-full max-w-xs"
+                onKeyUp={(e) => setCheckPass(e.target.value)}
                 {...register("password", {
                   required: {
                     value: true,
@@ -210,10 +214,53 @@ const SignUp = () => {
                 )}
               </label>
             </div>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Confirm Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                className="input input-bordered w-full max-w-xs"
+                onKeyUp={(e) => setCheckConfirmPass(e.target.value)}
+                {...register("confirmpass", {
+                  required: {
+                    value: true,
+                    message: "Confirm Password",
+                  },
+                  minLength: {
+                    value: 6,
+                    message: "Must be 6 characters or longer",
+                  },
+                  maxLength: {
+                    value: 16,
+                    message: "Maximum Characters 16",
+                  },
+                })}
+              />
+              <label className="label">
+                {errors.password?.type === "required" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
+              </label>
+            </div>
             {errorMessage}
             <input
               className="btn btn-secondary text-white w-full max-w-xs"
               type="submit"
+              disabled={checkPass !== checkConfirmPass}
               value="sign up"
             />
           </form>

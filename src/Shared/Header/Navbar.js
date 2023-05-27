@@ -3,30 +3,31 @@ import "./Navbar.css";
 import logo from "../../images/logo.png";
 import { BsFillBasketFill } from "react-icons/bs";
 import Button from "../Components/Button";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
-import { signOut } from "firebase/auth";
+import auth from "../../Firebase/firebase.init";
 import useCart from "../../Hooks/useCart";
+import useUser from "../../Hooks/useUser";
+import { logOut } from "../Components/utilities";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
   const [accountToggle, setAccountToggle] = useState(false);
   const [user] = useAuthState(auth);
-  const [cart] = useCart();
+  const [userInfo] = useUser();
+  const [cart, isLoading, refetch] = useCart();
 
   const handleSignOut = () => {
-    signOut(auth);
-    localStorage.removeItem("accessToken");
+    logOut();
     setAccountToggle(false);
   };
 
   // claculate the total amount of product in the cart //
   let totalCartProducts = 0;
-  cart.forEach((item) => {
+  cart?.forEach((item) => {
     totalCartProducts = totalCartProducts + item.quantity;
   });
-
+  refetch();
   return (
     <nav className="uppercase mt-[-35px]">
       <div className="flex sm:mx-8 md:mx-16 lg:mx-28 relative">
@@ -62,20 +63,22 @@ const Navbar = () => {
               >
                 <ul className="menu__list flex flex-col lg:flex-row md:items-center ml-10 lg:ml-0 my-3 lg:my-0 fs-bold text-white text-sm font-semibold">
                   <li className="p-2">
-                    <Link to="/">Home</Link>
+                    <NavLink
+                      to="/"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Home
+                    </NavLink>
                   </li>
                   <li className="p-2">
-                    <Link to="/products">Products</Link>
+                    <NavLink to="/products">Products</NavLink>
                   </li>
-                  <li className="p-2">
-                    <Link>Reviews</Link>
-                  </li>
-                  <li className="p-2">
-                    <Link>Contact us</Link>
-                  </li>
-                  <li className="p-2">
-                    <Link>About</Link>
-                  </li>
+
+                  {userInfo.role === "seller" && (
+                    <li className="p-2">
+                      <NavLink to="/dashboard">Dashboard</NavLink>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
@@ -107,7 +110,7 @@ const Navbar = () => {
                 className="avatar cursor-pointer"
               >
                 <div className="w-8 rounded-full ring ring-primary ring-offset-secondary ring-offset-2">
-                  <img src={user.photoURL} alt="" />
+                  <img src={userInfo?.img || user?.photoURL} alt="" />
                 </div>
 
                 <ul
@@ -116,7 +119,7 @@ const Navbar = () => {
                   }`}
                 >
                   <li>
-                    <Link to="">My Profile</Link>
+                    <Link to="profile">My Profile</Link>
                   </li>
                   <li>
                     <Link onClick={handleSignOut}>sign out</Link>

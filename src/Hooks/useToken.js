@@ -27,7 +27,7 @@ const useToken = (user, userRole) => {
           setToken(accessToken);
         });
     }
-  }, [user]);
+  }, [user, userRole]);
 
   return [token];
 };

@@ -12,7 +12,7 @@ const ProductCart = ({ product, handleAddToCart }) => {
   return (
     <div className="card rounded max-w-[350px] card-compact bg-base-100 shadow-xl relative mx-auto">
       <figure>
-        <img src={img} alt="Shoes" />
+        <img src={img} alt="products" />
       </figure>
       <div
         className="flex justify-center items-center w-16  h-16 text-white font-semibold text-lg absolute"

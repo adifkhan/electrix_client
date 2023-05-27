@@ -2,15 +2,21 @@ import React from "react";
 import useCart from "../../../Hooks/useCart";
 import { useNavigate } from "react-router-dom";
 import { FaRegTrashAlt, FaCartPlus } from "react-icons/fa";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../Firebase/firebase.init";
+import Loading from "../../Components/Loading";
 
 const CartModal = () => {
-  const [cart] = useCart();
+  const [user, loading] = useAuthState(auth);
+  const [cart, isLoading, refetch] = useCart(user);
   const navigate = useNavigate();
-
-  const customNavigation = () => {
+  if (loading || isLoading) {
+    return <Loading></Loading>;
+  }
+  const handleNavigation = () => {
     navigate("/checkout");
   };
-
+  refetch();
   return (
     <div className="max-w-xs relative">
       <input type="checkbox" id="cart-modal" className="modal-toggle" />
@@ -26,7 +32,7 @@ const CartModal = () => {
               </h3>
               <label
                 htmlFor="cart-modal"
-                onClick={customNavigation}
+                onClick={handleNavigation}
                 className="btn btn-sm btn-secondary text-white"
               >
                 Check-Out <FaCartPlus className="ml-2" />
@@ -40,7 +46,7 @@ const CartModal = () => {
 
           <div>
             <div className="grid grid-cols-1">
-              {cart.map((item) => (
+              {cart?.map((item) => (
                 <div
                   key={item._id}
                   className="flex flex-col sm:flex-row p-3 items-center bg-white border rounded-xl w-full my-2 mx-auto relative"

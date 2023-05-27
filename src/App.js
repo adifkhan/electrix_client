@@ -8,7 +8,13 @@ import SignUp from "./Pages/LogIn/SignUp";
 import Products from "./Pages/Products/Products";
 import CheckOut from "./Pages/CheckOut/CheckOut";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import AddProduct from "./Pages/Products/AddProduct/AddProduct";
+import UserProfile from "./Pages/UserProfile/UserProfile";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import MyProducts from "./Pages/Dashboard/MyProducts/MyProducts";
+import AllUsers from "./Pages/Dashboard/AllUsers/AllUsers";
+import ResetPass from "./Pages/LogIn/ResetPass";
 
 function App() {
   return (
@@ -16,11 +22,17 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/checkout" element={<CheckOut />} />
-        <Route path="/addproduct" element={<AddProduct />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="products" element={<Products />} />
+        <Route path="checkout" element={<CheckOut />} />
+        <Route path="addproduct" element={<AddProduct />} />
+        <Route path="dashboard" element={<Dashboard />}>
+          <Route index element={<MyProducts />}></Route>
+          <Route path="allusers" element={<AllUsers />}></Route>
+        </Route>
+        <Route path="profile" element={<UserProfile />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="resetpassword" element={<ResetPass />} />
       </Routes>
       <Footer />
       <ToastContainer />

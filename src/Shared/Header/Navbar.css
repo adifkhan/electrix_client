@@ -15,9 +15,9 @@
   border-right: 35px solid transparent;
 }
 
-.menu__toggle input:checked .menu__dropdown {
+/* .menu__toggle input:checked .menu__dropdown {
   top: 64px;
-}
+} */
 
 /* menu list items style sheet starts here */
 .menu__list li a {
@@ -57,3 +57,7 @@
   left: -15px;
 }
 /* menu list items style sheet ends here */
+
+.active {
+  color: aqua;
+}

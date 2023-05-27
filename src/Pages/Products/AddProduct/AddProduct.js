@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import useProductCatagories from "../../../Hooks/useProductCatagories";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import useUser from "../../../Hooks/useUser";
 
 const AddProduct = () => {
   const [categories] = useProductCatagories();
+  const [userInfo] = useUser();
 
   const {
     register,
@@ -41,6 +43,7 @@ const AddProduct = () => {
             category: data.category,
             price: data.price,
             seller: data.seller,
+            sellerId: userInfo?.userId,
             description: data.description,
             shipping: data.shipping,
             stock: data.stock,
@@ -54,6 +57,7 @@ const AddProduct = () => {
             method: "PUT",
             headers: {
               "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
             body: JSON.stringify(product),
           })
@@ -61,10 +65,10 @@ const AddProduct = () => {
             .then((inserted) => {
               console.log(inserted);
               if (inserted.insertedId) {
-                toast.success("Doctor added successfully!");
+                toast.success("Product added successfully!");
                 reset();
               } else {
-                toast.error("Failed to add the doctor!");
+                toast.error("Failed to add Product, try again!");
               }
             });
         }
