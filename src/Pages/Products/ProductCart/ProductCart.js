@@ -1,7 +1,7 @@
 import React from "react";
 import RatingsReviews from "../Ratings/RatingsReviews";
 
-const ProductCart = ({ product, handleAddToCart }) => {
+const ProductCart = ({ product, setMarkedProduct }) => {
   const { _id, name, description, img, price, category, ratings, customColor } =
     product;
 
@@ -28,13 +28,14 @@ const ProductCart = ({ product, handleAddToCart }) => {
           <RatingsReviews key={_id} ratings={stars} />
           <small className="pl-2">({ratings.length} reviews)</small>
         </div>
-        <div className="">
-          <button
-            onClick={() => handleAddToCart(product)}
+        <div>
+          <label
+            htmlFor="product-modal"
             className="btn btn-outline btn-secondary w-full"
+            onClick={() => setMarkedProduct(product)}
           >
             add to cart
-          </button>
+          </label>
         </div>
       </div>
     </div>

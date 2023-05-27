@@ -1,24 +1,20 @@
 import ProductCard from "./ProductCart/ProductCart";
 import useProductCatagories from "../../Hooks/useProductCatagories";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../Shared/Components/Button";
 import { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../Firebase/firebase.init";
 import useUser from "../../Hooks/useUser";
-import Loading from "../../Shared/Components/Loading";
-import { toast } from "react-toastify";
 import BreadCrumbs from "../../Shared/Components/BreadCrumbs";
 import useCart from "../../Hooks/useCart";
+import ProductModal from "./ProductCart/ProductModal";
 
 const Products = () => {
   const [categories] = useProductCatagories();
   const [selectedCategory, setSelectedCategory] = useState("ALL-CATEGORY");
   const [products, setProducts] = useState([]);
-  const [user, loading] = useAuthState(auth);
   const [userInfo] = useUser();
   const [refetch] = useCart();
-  const navigate = useNavigate();
+  const [markedProduct, setMarkedProduct] = useState(null);
 
   // load product according to the selected category //
   const handleProductLoading = (categoryName) => {
@@ -31,54 +27,6 @@ const Products = () => {
       .then((data) => setProducts(data));
   }, [selectedCategory]);
 
-  // function for adding products to the cart starts here //
-  const handleAddToCart = (newProduct) => {
-    if (user) {
-      const cartProduct = {
-        email: user.email,
-        productId: newProduct._id,
-        name: newProduct.name,
-        category: newProduct.category,
-        price: newProduct.price,
-        img: newProduct.img,
-        seller: newProduct.seller,
-        sellerId: newProduct.sellerId,
-        shipping: newProduct.shipping,
-        quantity: 1,
-      };
-      fetch(`http://localhost:5000/addtocart?email=${user.email}`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-        body: JSON.stringify(cartProduct),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.acknowledged === true) {
-            toast.success(`${newProduct.name} is added to cart!`);
-            refetch();
-          }
-        });
-    } else {
-      navigate("/login");
-    }
-
-    /* const inCart = cart.find((item) => item._id === newProduct._id);
-    if (!inCart) {
-      const newCart = [...cart, newProduct];
-      setCart(newCart);
-      addToDb(newProduct._id);
-      toast(newProduct.name, "is added in Your Cart !");
-    } else {
-      toast.error("This Product is Already in Your Cart !");
-    } */
-  };
-  // function for adding products to the cart ends here //
-  if (loading) {
-    return <Loading></Loading>;
-  }
   return (
     <div className="bg-[#002632]">
       <BreadCrumbs
@@ -168,12 +116,19 @@ const Products = () => {
               <ProductCard
                 key={product._id}
                 product={product}
-                handleAddToCart={handleAddToCart}
+                setMarkedProduct={setMarkedProduct}
               ></ProductCard>
             ))}
           </div>
         </div>
       </div>
+      {markedProduct && (
+        <ProductModal
+          markedProduct={markedProduct}
+          setMarkedProduct={setMarkedProduct}
+          refetch={refetch}
+        ></ProductModal>
+      )}
       <div className="w-full h-[1px] bg-[gray] mt-12"></div>
     </div>
   );
