@@ -3,21 +3,23 @@ import auth from "../Firebase/firebase.init";
 import { getToken, logOut } from "../Shared/Components/utilities";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import useUser from "./useUser";
 
 const useCart = () => {
-  const [user] = useAuthState(auth);
+  const [userInfo] = useUser();
   const token = getToken();
   const navigate = useNavigate();
+  const email = userInfo?.email;
 
   const {
     data: cart = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["mycart", user?.email],
+    queryKey: ["mycart", email],
     queryFn: async () => {
       const response = await fetch(
-        `http://localhost:5000/mycart?email=${user?.email}`,
+        `http://localhost:5000/mycart?email=${userInfo?.email}`,
         {
           headers: {
             authorization: `Bearer ${token}`,
@@ -31,6 +33,7 @@ const useCart = () => {
         return response.json();
       }
     },
+    enabled: !!email,
   });
 
   return [cart, isLoading, refetch];

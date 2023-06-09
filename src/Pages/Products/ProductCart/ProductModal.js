@@ -38,7 +38,7 @@ const ProductModal = ({ markedProduct, setMarkedProduct, refetch }) => {
           if (data.acknowledged === true) {
             toast.success(`${markedProduct.name} is added to cart!`);
             setMarkedProduct(null);
-            refetch();
+            // refetch();
           }
         });
     } else {

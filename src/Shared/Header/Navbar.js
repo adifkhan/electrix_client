@@ -27,7 +27,7 @@ const Navbar = () => {
   cart?.forEach((item) => {
     totalCartProducts = totalCartProducts + item.quantity;
   });
-  refetch();
+  // refetch();
   return (
     <nav className="uppercase mt-[-35px]">
       <div className="flex sm:mx-8 md:mx-16 lg:mx-28 relative">
@@ -90,19 +90,21 @@ const Navbar = () => {
           </section>
           <section className="flex items-center ">
             <div className="mr-10">
-              <label htmlFor="cart-modal" className="indicator">
-                <span className="indicator-item badge badge-neutral h-3 text-xs">
-                  {totalCartProducts}
-                </span>
-                <div className="grid w-8 h-8 place-items-center">
-                  <div
-                    className="text-base-100  tooltip tooltip-left text-xl z-10 cursor-pointer"
-                    data-tip="checkout"
-                  >
-                    <BsFillBasketFill />
+              {user && (
+                <label htmlFor="cart-modal" className="indicator">
+                  <span className="indicator-item badge badge-neutral h-3 text-xs">
+                    {totalCartProducts}
+                  </span>
+                  <div className="grid w-8 h-8 place-items-center">
+                    <div
+                      className="text-base-100  tooltip tooltip-left text-xl z-10 cursor-pointer"
+                      data-tip="checkout"
+                    >
+                      <BsFillBasketFill />
+                    </div>
                   </div>
-                </div>
-              </label>
+                </label>
+              )}
             </div>
             {user ? (
               <div

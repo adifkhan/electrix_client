@@ -2,21 +2,30 @@ import React from "react";
 import useCart from "../../../Hooks/useCart";
 import { useNavigate } from "react-router-dom";
 import { FaRegTrashAlt, FaCartPlus } from "react-icons/fa";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../../Firebase/firebase.init";
-import Loading from "../../Components/Loading";
+// import Loading from "../../Components/Loading";
 
 const CartModal = () => {
-  const [user, loading] = useAuthState(auth);
-  const [cart, isLoading, refetch] = useCart(user);
+  const [cart, isLoading, refetch] = useCart();
   const navigate = useNavigate();
-  if (loading || isLoading) {
-    return <Loading></Loading>;
-  }
+  // if (isLoading) {
+  //   return <Loading></Loading>;
+  // }
   const handleNavigation = () => {
     navigate("/checkout");
   };
-  refetch();
+  const handleRemoveFromCart = (id) => {
+    if (window.confirm("Do you want to remove this product from cart?")) {
+      fetch(`http://localhost:5000/mycart?id=${id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    }
+  };
+  // refetch();
   return (
     <div className="max-w-xs relative">
       <input type="checkbox" id="cart-modal" className="modal-toggle" />
@@ -52,15 +61,19 @@ const CartModal = () => {
                   className="flex flex-col sm:flex-row p-3 items-center bg-white border rounded-xl w-full my-2 mx-auto relative"
                 >
                   <img className="w-12 h-12 mr-5" src={item.img} alt="" />
-                  <div>
-                    <p className="font-semibold">{item.name}</p>
+                  <div className="w-full sm:w-[75%]">
+                    <p className="font-semibold text-center">{item.name}</p>
                     <div className="flex justify-between font-semibold">
-                      <p>Price: ${item.price}</p>
-                      <label className="btn btn-xs btn-primary btn-circle text-white absolute right-2 top-2">
-                        <FaRegTrashAlt />
-                      </label>
+                      <p>Quantity: ${item.quantity}</p>
+                      <p>Total Price: ${item.price * item.quantity}</p>
                     </div>
                   </div>
+                  <label
+                    className="btn btn-xs btn-primary btn-circle text-white absolute right-2 top-2"
+                    onClick={() => handleRemoveFromCart(item._id)}
+                  >
+                    <FaRegTrashAlt />
+                  </label>
                 </div>
               ))}
             </div>
