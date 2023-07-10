@@ -1,13 +1,15 @@
 import React from 'react';
 import useCart from '../../Hooks/useCart';
-import { FaCaretUp, FaCaretDown, FaRegTrashAlt } from 'react-icons/fa';
+// import { FaCaretUp, FaCaretDown, FaRegTrashAlt } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import BreadCrumbs from '../../Shared/Components/BreadCrumbs';
 import useUser from '../../Hooks/useUser';
-import Loading from '../../Shared/Components/Loading';
+import { useNavigate } from 'react-router-dom';
+// import Loading from '../../Shared/Components/Loading';
 
 const CheckOut = () => {
-  const [cart, isLoading, refetch] = useCart();
+  const navigate = useNavigate();
+  const [cart] = useCart();
   const [userInfo] = useUser();
   const { register, handleSubmit } = useForm();
 
@@ -28,7 +30,7 @@ const CheckOut = () => {
   //Calculation of the total amount to pay for user orders  ends here //
 
   const onSubmit = () => {
-    console.log('proceed!');
+    navigate('/payment');
   };
   return (
     <div>

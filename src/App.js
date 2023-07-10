@@ -15,6 +15,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyProducts from "./Pages/Dashboard/MyProducts/MyProducts";
 import AllUsers from "./Pages/Dashboard/AllUsers/AllUsers";
 import ResetPass from "./Pages/LogIn/ResetPass";
+import Payment from "./Pages/Payment/Payment";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="products" element={<Products />} />
         <Route path="checkout" element={<CheckOut />} />
+        <Route path="payment" element={<Payment />} />
         <Route path="addproduct" element={<AddProduct />} />
         <Route path="dashboard" element={<Dashboard />}>
           <Route index element={<MyProducts />}></Route>

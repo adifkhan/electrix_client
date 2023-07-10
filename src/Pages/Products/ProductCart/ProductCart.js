@@ -23,7 +23,7 @@ const ProductCart = ({ product, setMarkedProduct }) => {
       <div className='card-body'>
         <h2 className='text-md font-semibold'>{category}</h2>
         <h2 className='card-title justify-center'>{name}</h2>
-        <p className='text-center'>{description}</p>
+        <p className='text-center'>{description.slice(0, 75)}...</p>
         <div className='flex justify-between items-center w-full'>
           <RatingsReviews key={_id} ratings={stars} />
           <small className='pl-2'>({ratings.length} reviews)</small>
