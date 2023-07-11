@@ -53,7 +53,7 @@ const AddProduct = () => {
           };
 
           // put product info in server //
-          fetch('http://localhost:5000/product', {
+          fetch('https://electrix-server.vercel.app/product', {
             method: 'PUT',
             headers: {
               'content-type': 'application/json',

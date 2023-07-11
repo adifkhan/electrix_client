@@ -1,9 +1,9 @@
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../Firebase/firebase.init";
-import { getToken, logOut } from "../Shared/Components/utilities";
-import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import useUser from "./useUser";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../Firebase/firebase.init';
+import { getToken, logOut } from '../Shared/Components/utilities';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import useUser from './useUser';
 
 const useCart = () => {
   const [userInfo] = useUser();
@@ -16,10 +16,10 @@ const useCart = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["mycart", email],
+    queryKey: ['mycart', email],
     queryFn: async () => {
       const response = await fetch(
-        `http://localhost:5000/mycart?email=${userInfo?.email}`,
+        `https://electrix-server.vercel.app/mycart?email=${userInfo?.email}`,
         {
           headers: {
             authorization: `Bearer ${token}`,
@@ -27,7 +27,7 @@ const useCart = () => {
         }
       );
       if (!response.ok) {
-        navigate("/login");
+        navigate('/login');
         return logOut();
       } else {
         return response.json();

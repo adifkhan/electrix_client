@@ -17,7 +17,7 @@ const CheckoutForm = ({ price }) => {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     if (price > 0) {
-      fetch('http://localhost:5000/create-payment-intent', {
+      fetch('https://electrix-server.vercel.app/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ const CheckoutForm = ({ price }) => {
         email: userInfo.email,
         phone: userInfo.phone,
       };
-      fetch('http://localhost:5000/payments', {
+      fetch('https://electrix-server.vercel.app/payments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,12 +83,15 @@ const CheckoutForm = ({ price }) => {
         .then((data) => {
           if (data.insertedId) {
             // clear cart after completeing payment //
-            fetch(`http://localhost:5000/clear-cart?email=${userInfo.email}`, {
-              method: 'DELETE',
-              headers: {
-                authorization: `Bearer ${token}`,
-              },
-            })
+            fetch(
+              `https://electrix-server.vercel.app/clear-cart?email=${userInfo.email}`,
+              {
+                method: 'DELETE',
+                headers: {
+                  authorization: `Bearer ${token}`,
+                },
+              }
+            )
               .then((res) => res.json())
               .then((data) => {
                 if (data.acknowledged) {

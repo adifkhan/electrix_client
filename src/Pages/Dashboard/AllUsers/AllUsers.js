@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import Loading from "../../../Shared/Components/Loading";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { logOut } from "../../../Shared/Components/utilities";
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import Loading from '../../../Shared/Components/Loading';
+import { FaRegTrashAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { logOut } from '../../../Shared/Components/utilities';
 
 const AllUsers = () => {
   const navigate = useNavigate();
@@ -13,15 +13,18 @@ const AllUsers = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["allusers"],
+    queryKey: ['allusers'],
     queryFn: async () => {
-      const response = await fetch("http://localhost:5000/allusers", {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
+      const response = await fetch(
+        'https://electrix-server.vercel.app/allusers',
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
       if (!response.ok) {
-        navigate("/login");
+        navigate('/login');
         return logOut();
       } else {
         return response.json();
@@ -34,9 +37,9 @@ const AllUsers = () => {
   }
   refetch();
   return (
-    <div className="mx-5 text-sm absolute top-5 left-2">
-      <div className="overflow-x-scroll">
-        <table className="table table-zebra w-full">
+    <div className='mx-5 text-sm absolute top-5 left-2'>
+      <div className='overflow-x-scroll'>
+        <table className='table table-zebra w-full'>
           <thead>
             <tr>
               <th>Index</th>
@@ -58,7 +61,7 @@ const AllUsers = () => {
                 <th>{user.role}</th>
                 <th>{user.phone}</th>
                 <th>
-                  <div className="btn btn-circle btn-xs btn-secondary text-white">
+                  <div className='btn btn-circle btn-xs btn-secondary text-white'>
                     <FaRegTrashAlt />
                   </div>
                 </th>

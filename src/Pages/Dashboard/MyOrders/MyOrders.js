@@ -18,7 +18,7 @@ const MyOrders = () => {
     queryKey: ['myorders', `${userInfo.email}`],
     queryFn: async () => {
       const response = await fetch(
-        `http://localhost:5000/myorders?email=${userInfo.email}`,
+        `https://electrix-server.vercel.app/myorders?email=${userInfo.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`,

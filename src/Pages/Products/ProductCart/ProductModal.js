@@ -25,14 +25,17 @@ const ProductModal = ({ markedProduct, setMarkedProduct, refetch }) => {
         shipping: markedProduct.shipping,
         quantity: quantity,
       };
-      fetch(`http://localhost:5000/addtocart?email=${user.email}`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-        body: JSON.stringify(cartProduct),
-      })
+      fetch(
+        `https://electrix-server.vercel.app/addtocart?email=${user.email}`,
+        {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+          body: JSON.stringify(cartProduct),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.acknowledged === true) {

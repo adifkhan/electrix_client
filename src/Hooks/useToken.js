@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useToken = (user, userRole) => {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     const displayName = user?.user?.displayName;
@@ -13,17 +13,17 @@ const useToken = (user, userRole) => {
     };
 
     if (email) {
-      fetch(`http://localhost:5000/user/${email}`, {
-        method: "PUT",
+      fetch(`https://electrix-server.vercel.app/user/${email}`, {
+        method: 'PUT',
         headers: {
-          "content-type": "application/json",
+          'content-type': 'application/json',
         },
         body: JSON.stringify(currentUser),
       })
         .then((res) => res.json())
         .then((data) => {
           const accessToken = data.token;
-          localStorage.setItem("accessToken", accessToken);
+          localStorage.setItem('accessToken', accessToken);
           setToken(accessToken);
         });
     }
