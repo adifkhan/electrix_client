@@ -1,10 +1,34 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getToken } from '../../Shared/Components/utilities';
+import useUser from '../../Hooks/useUser';
+import { toast } from 'react-toastify';
+import useCart from '../../Hooks/useCart';
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ price }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const token = getToken();
+  const [userInfo] = useUser();
   const [cardError, setCardError] = useState('');
+  const [clientSecret, setClientSecret] = useState('');
+  const [cart] = useCart();
+
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+    if (price > 0) {
+      fetch('http://localhost:5000/create-payment-intent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ price }),
+      })
+        .then((res) => res.json())
+        .then((data) => setClientSecret(data.clientSecret));
+    }
+  }, [price, token]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +48,56 @@ const CheckoutForm = () => {
       setCardError(error.message);
     } else {
       setCardError('');
-      console.log('[PaymentMethod]', paymentMethod);
+    }
+    const { paymentIntent, error: confirmationError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: userInfo.displayName,
+            email: userInfo.email,
+          },
+        },
+      });
+    if (confirmationError) {
+      setCardError(confirmationError.message);
+      return;
+    }
+    if (paymentIntent.status === 'succeeded') {
+      const orders = {
+        products: cart,
+        totalAmount: price,
+        transsactionId: paymentIntent.id,
+        email: userInfo.email,
+        phone: userInfo.phone,
+      };
+      fetch('http://localhost:5000/payments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(orders),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            // clear cart after completeing payment //
+            fetch(`http://localhost:5000/clear-cart?email=${userInfo.email}`, {
+              method: 'DELETE',
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.acknowledged) {
+                  toast.success(`Your payment completed successfully !
+                  Transaction Id: ${paymentIntent.id}`);
+                }
+              });
+          }
+        });
     }
   };
   return (
@@ -48,7 +121,7 @@ const CheckoutForm = () => {
         />
         <button
           type='submit'
-          disabled={!stripe}
+          disabled={!stripe || !clientSecret}
           className='btn btn-sm btn-primary text-white mt-4'
         >
           Pay

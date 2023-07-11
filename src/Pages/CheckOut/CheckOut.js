@@ -73,21 +73,18 @@ const CheckOut = () => {
                 <span className='text-secondary font-medium'>${subTotal}</span>
               </p>
               <p className='font-normal mb-1'>
-                {' '}
-                Shipping Cost:{' '}
+                Shipping Cost:
                 <span className='text-secondary font-medium'>
                   ${shippingCost}
-                </span>{' '}
+                </span>
               </p>
               <p className='font-normal  mb-1'>
-                {' '}
-                VAT & SD:{' '}
+                VAT & SD:
                 <span className='text-secondary font-medium'>${tax}</span>
               </p>
               <p className='font-semibold'>
-                {' '}
-                Grand Total:{' '}
-                <span className='text-secondary'>${grandTotal}</span>{' '}
+                Grand Total:
+                <span className='text-secondary'>${grandTotal}</span>
               </p>
             </div>
           </div>

@@ -73,12 +73,9 @@ const Navbar = () => {
                   <li className='p-2'>
                     <NavLink to='/products'>Products</NavLink>
                   </li>
-
-                  {userInfo.role === 'seller' && (
-                    <li className='p-2'>
-                      <NavLink to='/dashboard'>Dashboard</NavLink>
-                    </li>
-                  )}
+                  <li className='p-2'>
+                    <NavLink to='/dashboard'>Dashboard</NavLink>
+                  </li>
                 </ul>
               </div>
             </div>
