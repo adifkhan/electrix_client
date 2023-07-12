@@ -5,7 +5,7 @@ import { FaRegTrashAlt, FaCartPlus } from 'react-icons/fa';
 // import Loading from "../../Components/Loading";
 
 const CartModal = () => {
-  const [cart, isLoading, refetch] = useCart();
+  const [cart] = useCart();
   const navigate = useNavigate();
   // if (isLoading) {
   //   return <Loading></Loading>;

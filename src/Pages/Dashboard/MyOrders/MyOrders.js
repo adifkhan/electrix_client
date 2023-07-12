@@ -4,17 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { logOut } from '../../../Shared/Components/utilities';
 import Loading from '../../../Shared/Components/Loading';
 import useUser from '../../../Hooks/useUser';
-import RatingsReviews from '../../Products/Ratings/RatingsReviews';
 
 const MyOrders = () => {
   const [userInfo] = useUser();
   const navigate = useNavigate();
 
-  const {
-    data: myOrders = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: myOrders = [], isLoading } = useQuery({
     queryKey: ['myorders', `${userInfo.email}`],
     queryFn: async () => {
       const response = await fetch(
@@ -39,7 +34,7 @@ const MyOrders = () => {
   const products = [];
   myOrders.map((orders) =>
     orders.products.map((item) => {
-      products.push(item);
+      return products.push(item);
     })
   );
   return (

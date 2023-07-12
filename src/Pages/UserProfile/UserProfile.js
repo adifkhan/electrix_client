@@ -5,8 +5,10 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import Loading from '../../Shared/Components/Loading';
+import { getToken } from '../../Shared/Components/utilities';
 
 const UserProfile = () => {
+  const token = getToken();
   const [userInfo, isLoading, refetch] = useUser();
   const [formToggle, setFormToggle] = useState(false);
   const [userRole, setUserRole] = useState('buyer');
@@ -47,33 +49,36 @@ const UserProfile = () => {
       .then((result) => {
         if (result.success) {
           imageUrl = result.data.url;
-        }
-      });
-    // define user Profile //
-    const userProfile = {
-      email: userInfo?.email,
-      displayName: data?.name || userInfo?.displayName,
-      role: userRole,
-      userId: userInfo.userId || randomId(10),
-      address: data?.address || userInfo?.address,
-      phone: data?.phone || userInfo?.phone,
-      img: imageUrl,
-    };
-    // put user data to database //
-    fetch(`https://electrix-server.vercel.app/user`, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(userProfile),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.acknowledged === true) {
-          toast.success('Profile updated!');
-          setFormToggle(false);
-        } else {
-          toast.error('somethign went wrong, try again!');
+
+          // define user Profile //
+          const userProfile = {
+            email: userInfo?.email,
+            displayName: data?.name || userInfo?.displayName,
+            role: userRole,
+            userId: userInfo.userId || randomId(10),
+            address: data?.address || userInfo?.address,
+            phone: data?.phone || userInfo?.phone,
+            img: imageUrl,
+          };
+
+          // put user data to database //
+          fetch(`https://electrix-server.vercel.app/user`, {
+            method: 'PUT',
+            headers: {
+              'content-type': 'application/json',
+              authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(userProfile),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged === true) {
+                toast.success('Profile updated!');
+                setFormToggle(false);
+              } else {
+                toast.error('somethign went wrong, try again!');
+              }
+            });
         }
       });
   };

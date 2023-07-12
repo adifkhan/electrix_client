@@ -1,5 +1,3 @@
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../Firebase/firebase.init';
 import { getToken, logOut } from '../Shared/Components/utilities';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';

@@ -15,7 +15,7 @@ const Navbar = () => {
   const [accountToggle, setAccountToggle] = useState(false);
   const [user] = useAuthState(auth);
   const [userInfo] = useUser();
-  const [cart, isLoading, refetch] = useCart();
+  const [cart] = useCart();
 
   const handleSignOut = () => {
     logOut();

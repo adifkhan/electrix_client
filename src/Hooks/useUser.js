@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../Firebase/firebase.init';
 import { useQuery } from '@tanstack/react-query';
