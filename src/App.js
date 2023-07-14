@@ -9,7 +9,6 @@ import Products from './Pages/Products/Products';
 import CheckOut from './Pages/CheckOut/CheckOut';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AddProduct from './Pages/Products/AddProduct/AddProduct';
 import UserProfile from './Pages/UserProfile/UserProfile';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import MyProducts from './Pages/Dashboard/MyProducts/MyProducts';
@@ -17,6 +16,7 @@ import AllUsers from './Pages/Dashboard/AllUsers/AllUsers';
 import ResetPass from './Pages/LogIn/ResetPass';
 import Payment from './Pages/Payment/Payment';
 import MyOrders from './Pages/Dashboard/MyOrders/MyOrders';
+import AddProduct from './Pages/Dashboard/MyProducts/AddProduct/AddProduct';
 
 function App() {
   return (

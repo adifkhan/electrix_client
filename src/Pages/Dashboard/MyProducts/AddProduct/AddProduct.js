@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import useProductCatagories from '../../../Hooks/useProductCatagories';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import useUser from '../../../Hooks/useUser';
+import useUser from '../../../../Hooks/useUser';
+import useProductCatagories from '../../../../Hooks/useProductCatagories';
+import BreadCrumbs from '../../../../Shared/Components/BreadCrumbs';
 
 const AddProduct = () => {
   const [categories] = useProductCatagories();
@@ -77,19 +77,16 @@ const AddProduct = () => {
 
   return (
     <div>
-      <div className='breadCrumbs text-accent flex flex-col items-center pt-16 pb-10 mt-[-30px]'>
-        <p className='text-3xl font-semibold uppercase'>Add Product</p>
-        <div className='text-sm font-medium  breadcrumbs'>
-          <ul>
-            <li>
-              <Link>Home</Link>
-            </li>
-            <li>
-              <Link>Products</Link>
-            </li>
-            <li>Add Product</li>
-          </ul>
-        </div>
+      <div>
+        <BreadCrumbs
+          breadcrumb={{
+            page: 'add product',
+            bread: [
+              { name: 'Products', address: '/products' },
+              { name: 'Dashboard', address: '/dashboard' },
+            ],
+          }}
+        ></BreadCrumbs>
       </div>
       <section className='flex flex-col items-center my-10'>
         <h2 className='text-xl font-semibold mb-3'>Add a New Product</h2>

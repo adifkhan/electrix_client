@@ -3,7 +3,7 @@ import './Navbar.css';
 import logo from '../../images/logo.png';
 import { BsFillBasketFill } from 'react-icons/bs';
 import Button from '../Components/Button';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase/firebase.init';
 import useCart from '../../Hooks/useCart';
@@ -16,9 +16,11 @@ const Navbar = () => {
   const [user] = useAuthState(auth);
   const [userInfo] = useUser();
   const [cart] = useCart();
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
     logOut();
+    navigate('/login');
     setAccountToggle(false);
   };
 
@@ -113,10 +115,18 @@ const Navbar = () => {
                 </div>
 
                 <ul
-                  className={`menu__list grid grid-cols-1 w-36 bg-secondary gap-3 fs-bold text-white text-xs font-semibold absolute top-[48px]  pl-3 sm:pl-7 py-4 ease-in-out duration-200 z-30 ${
+                  className={`menu__list grid grid-cols-1 w-36 bg-secondary gap-3 fs-bold text-white text-xs font-semibold absolute top-[48px]  px-3 sm:px-7 py-4 ease-in-out duration-200 z-30 ${
                     accountToggle ? 'right-0' : 'right-[-300px] hidden'
                   }`}
                 >
+                  <li className='text-accent'>
+                    {userInfo?.displayName}{' '}
+                    <p className='text-gray-400 text-[10px] font-normal'>
+                      {userInfo?.role}
+                    </p>
+                  </li>
+                  <hr className='' />
+
                   <li>
                     <Link to='profile'>My Profile</Link>
                   </li>

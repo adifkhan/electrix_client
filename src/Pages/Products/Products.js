@@ -1,9 +1,6 @@
 import ProductCard from './ProductCart/ProductCart';
 import useProductCatagories from '../../Hooks/useProductCatagories';
-import { Link } from 'react-router-dom';
-import Button from '../../Shared/Components/Button';
 import { useEffect, useState } from 'react';
-import useUser from '../../Hooks/useUser';
 import BreadCrumbs from '../../Shared/Components/BreadCrumbs';
 import useCart from '../../Hooks/useCart';
 import ProductModal from './ProductCart/ProductModal';
@@ -12,7 +9,6 @@ const Products = () => {
   const [categories] = useProductCatagories();
   const [selectedCategory, setSelectedCategory] = useState('ALL-CATEGORY');
   const [products, setProducts] = useState([]);
-  const [userInfo] = useUser();
   const [refetch] = useCart();
   const [markedProduct, setMarkedProduct] = useState(null);
 
@@ -103,15 +99,10 @@ const Products = () => {
           </div>
         </div>
         <div className='mx-auto px-3 w-full'>
-          <div className='flex flex-col lg:flex-row justify-between items-center my-8 px-8 w-full'>
-            <h1 className='mt-[-18] mb-8 text-primary text-center font-bold text-2xl lg:text-3xl '>
-              Our Best Products
+          <div className='my-8'>
+            <h1 className='text-primary text-center font-bold text-2xl lg:text-3xl '>
+              Grab What You Need Today !
             </h1>
-            {userInfo.role === 'seller' && (
-              <Link to='/addproduct'>
-                <Button>+ Add Product</Button>
-              </Link>
-            )}
           </div>
           <div className='grid grid-cols-1 min-[890px]:grid-cols-2 min-[1200px]:grid-cols-3 gap-8'>
             {products.map((product) => (
