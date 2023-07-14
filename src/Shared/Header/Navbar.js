@@ -119,17 +119,13 @@ const Navbar = () => {
                     accountToggle ? 'right-0' : 'right-[-300px] hidden'
                   }`}
                 >
-                  <li className='text-accent'>
-                    {userInfo?.displayName}{' '}
-                    <p className='text-gray-400 text-[10px] font-normal'>
+                  <li className='text-accent '>
+                    <Link to='profile'>{userInfo?.displayName} </Link>
+                    <p className='text-gray-400 text-[10px] font-normal pl-[5px]'>
                       {userInfo?.role}
                     </p>
                   </li>
-                  <hr className='' />
-
-                  <li>
-                    <Link to='profile'>My Profile</Link>
-                  </li>
+                  <hr />
                   <li>
                     <Link onClick={handleSignOut}>sign out</Link>
                   </li>

@@ -17,6 +17,7 @@ import ResetPass from './Pages/LogIn/ResetPass';
 import Payment from './Pages/Payment/Payment';
 import MyOrders from './Pages/Dashboard/MyOrders/MyOrders';
 import AddProduct from './Pages/Dashboard/MyProducts/AddProduct/AddProduct';
+import NotFound from './Pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<SignUp />} />
         <Route path='resetpassword' element={<ResetPass />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
       <ToastContainer />
