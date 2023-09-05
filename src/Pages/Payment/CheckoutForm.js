@@ -1,26 +1,28 @@
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useEffect, useState } from 'react';
-import { getToken } from '../../Shared/Components/utilities';
-import useUser from '../../Hooks/useUser';
-import { toast } from 'react-toastify';
-import useCart from '../../Hooks/useCart';
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import React, { useEffect, useState } from "react";
+import { getToken } from "../../Shared/Components/utilities";
+import useUser from "../../Hooks/useUser";
+import { toast } from "react-toastify";
+import useCart from "../../Hooks/useCart";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price }) => {
   const stripe = useStripe();
   const elements = useElements();
   const token = getToken();
   const [userInfo] = useUser();
-  const [cardError, setCardError] = useState('');
-  const [clientSecret, setClientSecret] = useState('');
+  const [cardError, setCardError] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
   const [cart] = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     if (price > 0) {
-      fetch('https://electrix-server.vercel.app/create-payment-intent', {
-        method: 'POST',
+      fetch("https://electrix-server.vercel.app/create-payment-intent", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ price }),
@@ -40,14 +42,14 @@ const CheckoutForm = ({ price }) => {
     if (card == null) {
       return;
     }
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
+    const { error } = await stripe.createPaymentMethod({
+      type: "card",
       card,
     });
     if (error) {
       setCardError(error.message);
     } else {
-      setCardError('');
+      setCardError("");
     }
     const { paymentIntent, error: confirmationError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -63,7 +65,7 @@ const CheckoutForm = ({ price }) => {
       setCardError(confirmationError.message);
       return;
     }
-    if (paymentIntent.status === 'succeeded') {
+    if (paymentIntent.status === "succeeded") {
       const orders = {
         products: cart,
         totalAmount: price,
@@ -71,10 +73,10 @@ const CheckoutForm = ({ price }) => {
         email: userInfo.email,
         phone: userInfo.phone,
       };
-      fetch('https://electrix-server.vercel.app/payments', {
-        method: 'POST',
+      fetch("https://electrix-server.vercel.app/payments", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(orders),
@@ -86,7 +88,7 @@ const CheckoutForm = ({ price }) => {
             fetch(
               `https://electrix-server.vercel.app/clear-cart?email=${userInfo.email}`,
               {
-                method: 'DELETE',
+                method: "DELETE",
                 headers: {
                   authorization: `Bearer ${token}`,
                 },
@@ -97,6 +99,7 @@ const CheckoutForm = ({ price }) => {
                 if (data.acknowledged) {
                   toast.success(`Your payment completed successfully !
                   Transaction Id: ${paymentIntent.id}`);
+                  navigate("/");
                 }
               });
           }
@@ -110,27 +113,27 @@ const CheckoutForm = ({ price }) => {
           options={{
             style: {
               base: {
-                fontSize: '16px',
-                color: '#fff',
-                '::placeholder': {
-                  color: '#aab7c4',
+                fontSize: "16px",
+                color: "#fff",
+                "::placeholder": {
+                  color: "#aab7c4",
                 },
               },
               invalid: {
-                color: '#9e2146',
+                color: "#9e2146",
               },
             },
           }}
         />
         <button
-          type='submit'
+          type="submit"
           disabled={!stripe || !clientSecret}
-          className='btn btn-sm btn-primary text-white mt-4'
+          className="btn btn-sm btn-primary text-white mt-4"
         >
           Pay
         </button>
       </form>
-      <p className='text-red-500'>{cardError}</p>
+      <p className="text-red-500">{cardError}</p>
     </>
   );
 };

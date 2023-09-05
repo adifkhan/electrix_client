@@ -10,7 +10,7 @@ const Features = () => {
     <div className="bg-secondary px-10 py-24">
       <div className="features__wrapper">
         <div
-          className="feature__body"
+          className="feature__body flex items-center rounded-xl p-3 w-full md:w-[450px]"
           style={{
             backgroundImage: `url(${feature1})`,
             backgroundRepeat: "no-repeat",
@@ -30,7 +30,7 @@ const Features = () => {
           </div>
         </div>
         <div
-          className="feature__body"
+          className="feature__body flex items-center rounded-xl p-3 w-full md:w-[450px]"
           style={{
             backgroundImage: `url(${feature2})`,
             backgroundRepeat: "no-repeat",
@@ -51,7 +51,7 @@ const Features = () => {
         </div>
         {/* flex-1 flex flex-col sm:flex-row justify-around items-center px-5 rounded-lg */}
         <div
-          className="feature__body "
+          className="feature__body flex items-center rounded-xl p-3 w-full md:w-[450px]"
           style={{
             backgroundImage: `url(${feature3})`,
             backgroundRepeat: "no-repeat",
