@@ -23,10 +23,11 @@
   object-fit: cover;
 }
 .swiper-button-prev {
-  color: #002632;
+  color: #c3002f;
   left: 20px;
+  font-size: 30px;
 }
 .swiper-button-next {
-  color: #002632;
+  color: #c3002f;
   right: 20px;
 }

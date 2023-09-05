@@ -5,7 +5,7 @@ import "./About.css";
 const About = () => {
   return (
     <div className="about__container">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-7">
         <div>
           <div className=" text-white w-[80%] mx-auto">
             <h2 className="uppercase text-white text-2xl">about</h2>
