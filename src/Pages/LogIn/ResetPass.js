@@ -1,17 +1,13 @@
 import React from "react";
 import BreadCrumbs from "../../Shared/Components/BreadCrumbs";
 import loginBg from "../../images/login-bg.jpg";
-import {
-  useAuthState,
-  useSendPasswordResetEmail,
-} from "react-firebase-hooks/auth";
+import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import auth from "../../Firebase/firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../../Shared/Components/Loading";
 import { toast } from "react-toastify";
 
 const ResetPass = () => {
-  const [user] = useAuthState(auth);
   const [sendPasswordResetEmail, sending, error] =
     useSendPasswordResetEmail(auth);
 
