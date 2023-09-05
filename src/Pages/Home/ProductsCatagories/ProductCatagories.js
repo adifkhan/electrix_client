@@ -26,9 +26,29 @@ const ProductCatagories = () => {
       </div>
       <div className="w-[90%] mx-auto">
         <Swiper
-          slidesPerView={4}
-          spaceBetween={30}
-          centeredSlides
+          breakpoints={{
+            350: {
+              slidesPerView: 1,
+              centeredSlides: true,
+            },
+            600: {
+              slidesPerView: 2,
+              centeredSlides: true,
+            },
+            900: {
+              slidesPerView: 3,
+            },
+            1100: {
+              slidesPerView: 3,
+            },
+            1200: {
+              slidesPerView: 3,
+            },
+            1250: {
+              slidesPerView: 4,
+              centeredSlides: true,
+            },
+          }}
           navigation
           loop
           modules={[Navigation]}

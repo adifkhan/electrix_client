@@ -4,7 +4,7 @@ import "./BusinessSummary.css";
 
 const BusinessSummary = () => {
   return (
-    <div className="flex flex-col lg:flex-row bg-primary">
+    <div className="business__summery flex flex-col lg:flex-row bg-primary mb-12">
       <div className=" flex-1 flex flex-col justify-center items-center text-center">
         <div className=" my-12">
           <h2 className="text-3xl text-base-100 font-semibold">

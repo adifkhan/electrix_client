@@ -59,13 +59,13 @@ const HeaderTop = () => {
           </div>
         </div>
         <div className="flex items-center my-2  md:hidden lg:flex">
-          <div className="ml-8 hover:text-primary relative">
+          <div className="hover:text-primary relative">
             <input
               className="bg-white sm:w-[280px] h-8 rounded-full text-secondary pl-5 pr-9"
               type="text"
             />
-            <span className="flex justify-center items-center text-primary h-9 cursor-pointer absolute top-[-2px]  right-1">
-              <HiSearch className="w-8 h-6" />
+            <span className="flex justify-center items-center text-white h-7 w-7 cursor-pointer absolute top-[2px]  right-[2px] rounded-full bg-primary">
+              <HiSearch className="w-5 h-5" />
             </span>
           </div>
         </div>
@@ -76,8 +76,8 @@ const HeaderTop = () => {
             className="bg-white w-[280px] h-8 rounded-full text-secondary pl-2 pr-9"
             type="text"
           />
-          <span className="flex justify-center items-center text-primary h-9 cursor-pointer absolute top-[-2px]  right-[-2px]">
-            <HiSearch className="w-8 h-6" />
+          <span className="flex justify-center items-center text-white h-7 w-7 cursor-pointer absolute top-[2px]  right-[2px] rounded-full bg-primary">
+            <HiSearch className="w-5 h-5" />
           </span>
         </div>
       </section>

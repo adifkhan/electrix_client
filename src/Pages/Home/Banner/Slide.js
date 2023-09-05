@@ -33,7 +33,6 @@ export default function App() {
       >
         {catagories.map((catagory) => (
           <SwiperSlide key={catagory._id}>
-            {" "}
             {
               <img
                 src={catagory.img}

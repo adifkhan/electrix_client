@@ -2,8 +2,8 @@
   opacity: 0.6;
 }
 .product__body {
-  transition: scale 300ms;
+  transition: scale 0.4s ease;
 }
 .product__body:hover {
-  scale: 1.12;
+  scale: 1.15;
 }

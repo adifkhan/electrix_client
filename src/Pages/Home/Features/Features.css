@@ -1,3 +1,16 @@
+.features__wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.feature__body {
+  width: 380px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 12px;
+}
 .shipping__icon {
   transition: scale 300ms;
 }

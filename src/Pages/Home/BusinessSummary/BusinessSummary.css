@@ -1,4 +1,16 @@
 .bussiness__summary__banner {
   background-image: url(../../../images/Banner/bg2.jpg);
-  background-size: contain;
+  background-size: cover;
+}
+.business__summery {
+  position: relative;
+}
+.business__summery::after {
+  content: "";
+  height: 48px;
+  width: 100%;
+  background-color: #002632;
+  position: absolute;
+  bottom: -48px;
+  left: 0;
 }

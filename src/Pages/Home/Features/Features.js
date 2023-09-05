@@ -8,16 +8,16 @@ import feature3 from "../../../images/Feature/feature3.jpg";
 const Features = () => {
   return (
     <div className="bg-secondary px-10 py-24">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="features__wrapper">
         <div
-          className="feature__body flex-1 flex flex-col sm:flex-row justify-around items-center px-5 rounded-lg"
+          className="feature__body"
           style={{
             backgroundImage: `url(${feature1})`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
           }}
         >
-          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-primary">
+          <div className="bg-base-100 p-7 rounded-full border-8 border-primary">
             <FaShippingFast className="shipping__icon text-primary text-5xl" />
           </div>
           <div className="m-5">
@@ -30,14 +30,14 @@ const Features = () => {
           </div>
         </div>
         <div
-          className="feature__body flex-1 flex flex-col sm:flex-row justify-around items-center px-5 rounded-lg"
+          className="feature__body"
           style={{
             backgroundImage: `url(${feature2})`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
           }}
         >
-          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-secondary">
+          <div className="bg-base-100 p-7 rounded-full border-8 border-secondary">
             <FaUserAlt className="shipping__icon text-secondary text-5xl" />
           </div>
           <div className="m-5">
@@ -49,15 +49,16 @@ const Features = () => {
             </p>
           </div>
         </div>
+        {/* flex-1 flex flex-col sm:flex-row justify-around items-center px-5 rounded-lg */}
         <div
-          className="feature__body flex-1 flex flex-col sm:flex-row justify-around items-center px-5 rounded-lg"
+          className="feature__body "
           style={{
             backgroundImage: `url(${feature3})`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
           }}
         >
-          <div className="bg-base-100 p-7 m-4 rounded-full border-8 border-primary">
+          <div className="bg-base-100 p-7 rounded-full border-8 border-primary">
             <FaTags className="shipping__icon text-primary text-5xl" />
           </div>
           <div className="m-5">
