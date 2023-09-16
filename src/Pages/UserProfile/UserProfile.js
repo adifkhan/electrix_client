@@ -57,7 +57,7 @@ const UserProfile = () => {
             img: imageUrl,
           };
 
-          // put user data to database //
+          // put user data in database //
           fetch(`https://electrix-server.vercel.app/user`, {
             method: "PUT",
             headers: {
